@@ -1,15 +1,71 @@
 import React, {useState} from 'react'
+import {useNavigate} from "react-router-dom"
 import './Home.css'
 
+class Node {
+    constructor() {
+        this.children = new Map()
+    }
+    add(word) {
+        let cur = this
+        for (let i=0; i<word.length; i++) {
+            cur.children.set(word[i].toLowerCase(),new Node())
+            cur = cur.children.get(word[i].toLowerCase())
+        }
+    }
+    search(word) {
+        let cur = this
+        for (let i=0; i<word.length; i++) {
+            if (!cur.children.get(word[i].toLowerCase())) return []
+            cur = cur.children.get(word[i].toLowerCase())
+        }
+        let results = []
+        for (let [child,val] of cur.children) {
+            let curResults = val.getWords()
+            for (let result of curResults) {
+                results.push(word+child+result)
+                console.log(word+child+result)
+            }
+        }
+        return results
+    }
+    getWords() {
+      if (this.children.size == 0) return [""]
+      let result = []
+      for (let [child,val] of this.children) {
+        let cur = val.getWords()
+        for (let word of cur) {
+            result.push(child+word)
+        }
+      }
+      return result
+    }
+}
+  
+function createTrie(words) {
+    var root = new Node()
+    for (let word of words) {
+        root.add(word)
+    }
+    return root
+}
 function Home() {
+    const SEARCH_PROMPTS = ["Why is the sky blue", "I think I'm happy", "Crowdstrike"]
+    var trieRoot = createTrie(SEARCH_PROMPTS)
     const [searchTerm, setSearchTerm] = useState("")
+    const [suggested, setSuggested] = useState([])
     const handleInputChange = (event) => {
         setSearchTerm(event.target.value);
         // display suggested searches
+        setSuggested(trieRoot.search(searchTerm))
+        console.log(suggested)
     };
     const handleSubmit = (event) => {
         event.preventDefault();
         // navigate to page
+    }
+    const navigate = (page) => {
+        useNavigate(encodeURIComponent(page))
     }
     return (
     <div id="Google-page">
@@ -33,6 +89,15 @@ function Home() {
                 onChange={handleInputChange}
                 />
             </div>
+        </div>
+        <div>
+        {
+            suggested.map((suggestion) => {
+                return (
+                    <div onClick={suggestion}>{suggestion}</div>
+                )
+            })
+        }
         </div>
     </div>
     )
