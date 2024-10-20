@@ -11,8 +11,8 @@ function App() {
       <BrowserRouter >
         <Routes>
           <Route path="/" element={<Home/>}></Route>
-          <Route path={"/"+encodeURIComponent("Why is the sky blue")} element={<WhySkyBlue/>}></Route>
-          <Route path={"/"+encodeURIComponent("I think I'm happy")} element={<ImHappy/>}></Route>
+          <Route path={"/"+encodeURIComponent("why is the sky blue")} element={<WhySkyBlue/>}></Route>
+          <Route path={"/"+encodeURIComponent("i think i'm happy")} element={<ImHappy/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>
