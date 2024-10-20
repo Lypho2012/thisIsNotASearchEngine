@@ -25,8 +25,6 @@ class Node {
             let curResults = val.getWords()
             for (let result of curResults) {
                 results.push(word+child+result)
-                console.log(word)
-                console.log(word+child+result)
             }
         }
         return results
@@ -56,10 +54,10 @@ function Home() {
     var trieRoot = createTrie(SEARCH_PROMPTS)
     const [searchTerm, setSearchTerm] = useState("")
     const [suggested, setSuggested] = useState<string[]>([])
+    const [searchActive, setSearchActive] = useState(false)
     const handleInputChange = (event) => {
         setSearchTerm(event.target.value);
         // display suggested searches
-        console.log(event)
         setSuggested(trieRoot.search(searchTerm))
     };
     const handleSubmit = (event) => {
@@ -67,17 +65,28 @@ function Home() {
         // navigate to page
     }
     document.addEventListener("click", function(event) {
-        if (event.target.id == "search-bar-text") {
+        if (event.target?.id == "search-bar-text") {
             var searchBar = document.getElementById("search-bar")
-            if (searchBar != null) {
-                searchBar.focus();
-                console.log(document.activeElement)
+            if (searchBar) {
+                searchBar.id = "search-bar-active"
+                var boxShadow = document.getElementById("search-active-box-shadow")
+                if (boxShadow) {
+                    boxShadow.setAttribute("box-shadow","1px 1px 4px 1px rgba(0, 0, 0, 0.2)")
+                }
+                console.log(boxShadow?.attributes)
             }
+            setSearchActive(true)
         } else {
-            var searchBar = document.getElementById("search-bar")
-            if (searchBar != null) {
-                searchBar.blur();
+            var searchBar = document.getElementById("search-bar-active")
+            if (searchBar) {
+                searchBar.id = "search-bar"
+                var boxShadow = document.getElementById("search-active-box-shadow")
+                if (boxShadow) {
+                    boxShadow.setAttribute("box-shadow","none")
+                }
+                console.log(boxShadow?.attributes)
             }
+            setSearchActive(false)
         }
     })
     
@@ -92,34 +101,37 @@ function Home() {
             <div id="e-letter" className="Google-letter">e</div>
         </div>
         <div id="search-bar-div">
-            <div id="search-bar">
-                <svg id="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px">
-                    <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
-                </svg>
-                <input
-                id="search-bar-text"
-                type="text"
-                value={searchTerm}
-                onChange={handleInputChange}
-                />
-            </div>
-            <div id="suggestions">
-            {
-                suggested.map((suggestion) => {
-                    return (
-                        <div className="suggestion">
-                            <svg className="suggestion-search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px">
-                                <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
-                            </svg>
-                            <Link 
-                                to={"/"+encodeURIComponent(suggestion)}
-                                className="suggestion-link">
-                                    {suggestion}
-                            </Link>
-                        </div>
-                    )
-                })
-            }
+            <div id="search-active-box-shadow">
+                <div id="search-bar">
+                    <svg id="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px">
+                        <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                    </svg>
+                    <input
+                    id="search-bar-text"
+                    type="text"
+                    value={searchTerm}
+                    onChange={handleInputChange}
+                    />
+                </div>
+                {
+                searchActive ?
+                <div id="suggestions">
+                    {suggested.map((suggestion) => {
+                        return (
+                            <div className="suggestion">
+                                <svg className="suggestion-search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px">
+                                    <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                                </svg>
+                                <Link 
+                                    to={"/"+encodeURIComponent(suggestion)}
+                                    className="suggestion-link">
+                                        {suggestion}
+                                </Link>
+                            </div>
+                        )
+                    })}
+                </div> : null
+                }
             </div>
         </div>
         
