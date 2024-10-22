@@ -86,6 +86,8 @@
     border-color: rgba(0, 0, 0, 0.1);
     border-width: 1px;
     margin: auto;
+    overflow: scroll;
+    height: 115px;
 }
 .suggestion {
     margin-top: auto;
@@ -110,4 +112,59 @@
 }
 #last-suggestion {
     border-radius: 0 0 24px 24px;
+}
+#Google-topbar {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+}
+.Google-topbar-components {
+    color: rgba(0, 0, 0, 0.9);
+    text-decoration: none;
+    padding: 15px;
+}
+.Google-topbar-components:hover {
+    text-decoration: underline;
+}
+#Google-topbar-components-right-div {
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+}
+#Google-topbar-menu {
+    width: 24px;
+    height: 24px;
+}
+#Google-topbar-signin {
+    border-radius: 30px;
+    background-color: #0760ef;
+    height: 15px;
+    width: 60px;
+    align-self: center;
+    text-decoration: none;
+    user-select: none;
+}
+#Google-topbar-signin-text {
+    color: white;
+    font-size: 15px;
+    margin: 0;
+    padding: 0;
+}
+#Google-bottom-bar {
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    padding: auto;
+    margin: auto;
+}
+.Google-bottom-bar-components {
+    background-color: rgba(0, 0, 0, 0.03);
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    width: fit-content;
+    left: auto;
+}
+.Google-bottom-bar-components:hover {
+    border-color: rgba(0, 0, 0, 0.3);
 }
