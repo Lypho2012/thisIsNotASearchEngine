@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {Link, useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import './Home.css'
 
 class Node {
@@ -55,16 +55,18 @@ function Home() {
     const [searchTerm, setSearchTerm] = useState("")
     const [suggested, setSuggested] = useState<string[]>(trieRoot.search(""))
     const [searchActive, setSearchActive] = useState(false)
+    const [handleSubmit, setHandleSubmit] = useState(false)
+    const [navigateDestination,setNavigateDestination] = useState("")
     const navigate = useNavigate();
     const handleInputChange = (event) => {
         setSearchTerm(event.target.value);
         handleSearchActive(event)
     };
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        // navigate to page
-        navigate("/"+encodeURIComponent(event.target.value))
-    }
+    useEffect(() => {
+        if (handleSubmit) {
+            navigate(encodeLink(navigateDestination))
+        }
+    })
     const handleSearchActive = (event) => {
         setSuggested(trieRoot.search(searchTerm))
         if (event.target?.id == "search-bar-text") {
@@ -89,16 +91,42 @@ function Home() {
                 }
                 setSearchActive(false)
             }
+            console.log(event)
+            if (event.target?.className == "suggestion" 
+                || event.target?.className == "suggestion-text") {
+                setHandleSubmit(true)
+                setNavigateDestination(event.target?.innerText)
+            }
+            if (event.target?.className == "suggestion-search-icon") {
+                setHandleSubmit(true)
+                setNavigateDestination(event.target?.nextSibling.innerText)
+            }
         }
     }
     document.addEventListener("click", function(event) {
         handleSearchActive(event)
     })
-    /*document.addEventListener("keydown", function(event) {
+    document.addEventListener("keydown", function(event) {
         if (event.code == "Enter") {
-            handleSubmit(event)
+            setHandleSubmit(true)
+            let searchBarText = document.getElementById("search-bar-text")
+            if (searchBarText) {
+                setNavigateDestination(searchBarText.innerText)
+            }
         }
-    })*/
+    })
+    function encodeLink(name) {
+        name = name.toLowerCase()
+        name = name.split(" ")
+        name = name.join("+")
+        let res = ""
+        for (let i=0; i<name.length; i++) {
+            if (name[i].match(/^[0-9a-z]+$/)) {
+                res += name[i]
+            }
+        }
+        return name
+    }
     return (
     <div id="Google-page">
         <div id="Google-header">
@@ -125,17 +153,27 @@ function Home() {
                 {
                 searchActive ?
                 <div id="suggestions">
-                    {suggested.map((suggestion) => {
+                    {suggested.map((suggestion,index) => {
+                        if (index == suggested.length-1) {
+                            return (
+                                <div key={suggestion} id="last-suggestion" className="suggestion">
+                                    <svg className="suggestion-search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px">
+                                        <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                                    </svg>
+                                    <p className="suggestion-text">
+                                        {suggestion}
+                                    </p>
+                                </div>
+                            )
+                        }
                         return (
                             <div key={suggestion} className="suggestion">
                                 <svg className="suggestion-search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px">
                                     <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
                                 </svg>
-                                <Link 
-                                    to={"/"+encodeURIComponent(suggestion)}
-                                    className="suggestion-link">
-                                        {suggestion}
-                                </Link>
+                                <div className="suggestion-text">
+                                    {suggestion}
+                                </div>
                             </div>
                         )
                     })}
