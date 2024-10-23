@@ -1,0 +1,17 @@
+#about-page {
+    width: auto;
+    height: auto;
+    padding: 20px;
+}
+#about-heading {
+    font-size: 40px;
+    padding: 20px;
+}
+#about-body {
+    padding: 20px;
+    padding-bottom: 30px;
+}
+#about-back-link {
+    color: black;
+    width: fit-content;
+}
