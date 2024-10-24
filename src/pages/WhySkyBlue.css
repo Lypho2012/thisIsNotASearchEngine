@@ -1,0 +1,33 @@
+#bluesky-div {
+    background-image: linear-gradient(rgb(14, 195, 255),white);
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    perspective: 50px;
+}
+#bluesky-search-result-div {
+    transform: translateZ(0px);
+    width: 100vw;
+    height: 110vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#sun {
+    background-image: radial-gradient(rgb(244, 237, 41),rgb(244, 244, 117),transparent 60%);
+    width: 200px;
+    height: 200px;
+    transform: translateZ(-20px);
+    position: absolute;
+    left: auto;
+    right: 0px;
+    top: auto;
+    bottom: 0px;
+}
