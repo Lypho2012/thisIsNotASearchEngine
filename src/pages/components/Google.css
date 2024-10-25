@@ -1,0 +1,26 @@
+#Google-header {
+    display: flex;
+    flex-direction: row;
+    width:fit-content;
+    margin-top: 10%;
+    margin-bottom: 1%;
+    margin-left: auto;
+    margin-right: auto;
+    height: fit-content;
+}
+.Google-letter {
+    font-family: futura;
+    font-size: 100px;
+}
+#first-o-letter, #e-letter {
+    color: #EA4335;
+}
+#big-g-letter, #little-g-letter {
+    color: #4285F4;
+}
+#second-o-letter {
+    color: #FBBC05;
+}
+#l-letter {
+    color: #34A853;
+}

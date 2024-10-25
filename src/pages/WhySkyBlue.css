@@ -31,3 +31,13 @@
     top: auto;
     bottom: 0px;
 }
+.search-result-searchbar-div {
+    width:fit-content;
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+}
+.search-result-google-div {
+    margin-top: 15px;
+    margin-left: 15px;
+}

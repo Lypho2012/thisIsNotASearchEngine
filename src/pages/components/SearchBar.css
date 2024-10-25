@@ -1,0 +1,100 @@
+
+#suggestions {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    border: solid;
+    border-radius: 0 0 25px 25px;
+    border-color: rgba(0, 0, 0, 0.1);
+    border-width: 1px;
+    overflow: auto;
+    height: fit-content;
+    min-height: 10px;
+    max-height: 115px;
+    background-color: white;
+    scrollbar-width: none;
+}
+.suggestion {
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    padding: 5px 15px 5px 15px;
+}
+.suggestion:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.suggestion-text {
+    font-style: normal;
+    color: black;
+    text-decoration: none;
+    margin: 5px;
+    user-select: none;
+}
+.suggestion-search-icon {
+    margin-right: 10px;
+}
+#last-suggestion {
+    border-radius: 0 0 24px 24px;
+}
+
+#search-bar-div {
+    padding: 20px;
+    width: 100%;
+}
+#search-active-box-shadow {
+    width:fit-content;
+    height:fit-content;
+    border-radius: 25px;
+    box-shadow: none;
+    margin: auto;
+}
+#search-bar {
+    border: solid;
+    display: flex;
+    flex-direction: row;
+    border-radius: 25px;
+    border-color: rgba(0, 0, 0, 0.1);
+    border-width: 1px;
+    width: 600px;
+    height: 50px;
+    transition: box-shadow 0.1s ease;
+    background-color: white;
+}
+#search-bar-active {
+    display: flex;
+    flex-direction: row;
+    border-color: rgba(0, 0, 0, 0.1);
+    border-width: 1px;
+    width: 600px;
+    height: 50px;
+    border-radius: 25px 25px 0 0;
+    box-shadow: none;
+    border-style: solid solid none solid;
+    background-color: white;
+}
+#search-bar:hover {
+    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.2);
+}
+#search-bar-text {
+    background-color: transparent;
+    border: none;
+    height: 70%;
+    margin-top: 7px;
+    width: 90%;
+    outline: none;
+    font-size: 18px;
+}
+#search-icon {
+    padding: 15px;
+    margin: 0;
+}
+#search-x-button {
+    border: none;
+    background: none;
+    padding: 15px;
+    margin: 0;
+    width: 55px;
+}
+#search-x-button:hover {
+    cursor: pointer;
+}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import "./SearchBar.css"
 
 class Node {
     children: Map<string, any>
@@ -49,11 +50,11 @@ function createTrie(words) {
     return root
 }
 
-function SearchBar() {
+function SearchBar({prevSearchTerm=""}) {
     const SEARCH_PROMPTS = ["Why is the sky blue", "I think I'm happy", "Crowdstrike"]
     var trieRoot = createTrie(SEARCH_PROMPTS)
-    const [searchTerm, setSearchTerm] = useState("")
-    const [suggested, setSuggested] = useState<string[]>(trieRoot.search(""))
+    const [searchTerm, setSearchTerm] = useState(prevSearchTerm)
+    const [suggested, setSuggested] = useState<string[]>(trieRoot.search(searchTerm))
     const [searchActive, setSearchActive] = useState(false)
     const [handleSubmit, setHandleSubmit] = useState(false)
     const [navigateDestination,setNavigateDestination] = useState("")
@@ -64,8 +65,7 @@ function SearchBar() {
     };
     useEffect(() => {
         if (handleSubmit) {
-            console.log(encodeLink(navigateDestination))
-            navigate(encodeLink(navigateDestination))
+            navigate("/"+encodeLink(navigateDestination),{state: {searchTerm: searchTerm}})
             setHandleSubmit(false)
         }
     })
@@ -95,6 +95,9 @@ function SearchBar() {
             }
         }
     }
+    const handleXInput = () => {
+        setSearchTerm("")
+    }
     document.addEventListener("click", function(event) {
         handleSearchActive(event)
         if (event.target?.className == "suggestion" 
@@ -103,6 +106,7 @@ function SearchBar() {
             setNavigateDestination(event.target?.innerText)
         } else if (event.target?.className == "suggestion-search-icon") {
             setHandleSubmit(true)
+            setSearchTerm(event.target?.nextSibling.innerText)
             setNavigateDestination(event.target?.nextSibling.innerText)
         }
     })
@@ -129,49 +133,54 @@ function SearchBar() {
     }
     return (
     <div id="search-bar-div">
-            <div id="search-active-box-shadow">
-                <div id="search-bar">
-                    <svg id="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px">
-                        <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+        <div id="search-active-box-shadow">
+            <div id="search-bar">
+                <svg id="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px">
+                    <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+                <input
+                id="search-bar-text"
+                type="text"
+                value={searchTerm}
+                onChange={handleInputChange}
+                />
+                <button id="search-x-button" onClick={handleXInput}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
                     </svg>
-                    <input
-                    id="search-bar-text"
-                    type="text"
-                    value={searchTerm}
-                    onChange={handleInputChange}
-                    />
-                </div>
-                {
-                searchActive ?
-                <div id="suggestions">
-                    {suggested.map((suggestion,index) => {
-                        if (index == suggested.length-1) {
-                            return (
-                                <div key={suggestion} id="last-suggestion" className="suggestion">
-                                    <svg className="suggestion-search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px">
-                                        <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
-                                    </svg>
-                                    <p className="suggestion-text">
-                                        {suggestion}
-                                    </p>
-                                </div>
-                            )
-                        }
+                </button>
+            </div>
+            {
+            searchActive ?
+            <div id="suggestions">
+                {suggested.map((suggestion,index) => {
+                    if (index == suggested.length-1) {
                         return (
-                            <div key={suggestion} className="suggestion">
+                            <div key={suggestion} id="last-suggestion" className="suggestion">
                                 <svg className="suggestion-search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px">
                                     <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
                                 </svg>
-                                <div className="suggestion-text">
+                                <p className="suggestion-text">
                                     {suggestion}
-                                </div>
+                                </p>
                             </div>
                         )
-                    })}
-                </div> : null
-                }
-            </div>
+                    }
+                    return (
+                        <div key={suggestion} className="suggestion">
+                            <svg className="suggestion-search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px">
+                                <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                            </svg>
+                            <div className="suggestion-text">
+                                {suggestion}
+                            </div>
+                        </div>
+                    )
+                })}
+            </div> : null
+            }
         </div>
+    </div>
     )
 }
 

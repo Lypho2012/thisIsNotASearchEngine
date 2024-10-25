@@ -2,8 +2,13 @@ import React, { useEffect, useState } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import './Home.css'
 import SearchBar from './components/SearchBar.tsx'
+import Google from './components/Google.tsx'
 
 function Home() {
+    let google_letters = document.getElementsByClassName("Google-letter")
+    for (let google_letter of google_letters) {
+        google_letter.setAttribute("font-size","100px")
+    }
     return (
     <div id="Google-page">
         <div id="Google-topbar">
@@ -20,14 +25,7 @@ function Home() {
                 </div>
             </div>
         </div>
-        <div id="Google-header">
-            <div id="big-g-letter" className="Google-letter">G</div>
-            <div id="first-o-letter" className="Google-letter">o</div>
-            <div id="second-o-letter" className="Google-letter">o</div>
-            <div id="little-g-letter" className="Google-letter">g</div>
-            <div id="l-letter" className="Google-letter">l</div>
-            <div id="e-letter" className="Google-letter">e</div>
-        </div>
+        <Google/>
         <SearchBar/>
         <div id="Google-bottom-bar">
             <div className="Google-bottom-bar-components">Google Search</div>
