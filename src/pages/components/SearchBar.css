@@ -98,3 +98,11 @@
 #search-x-button:hover {
     cursor: pointer;
 }
+.search-error {
+    color: red;
+    padding: 10px;
+}
+#please-button-text {
+    margin: auto;
+    padding-right: 20px;
+}

@@ -8,6 +8,9 @@
     margin-right: auto;
     height: fit-content;
 }
+#Google-header:hover {
+    cursor: pointer;
+}
 .Google-letter {
     font-family: futura;
     font-size: 100px;

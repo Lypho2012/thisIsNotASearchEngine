@@ -11,17 +11,18 @@
     bottom: 0;
     left: 0;
     perspective: 50px;
+    perspective-origin: 80%;
 }
 #bluesky-search-result-div {
     transform: translateZ(0px);
     width: 100vw;
-    height: 110vh;
+    height: 200vh;
     position: absolute;
     top: 0;
     left: 0;
 }
-#sun {
-    background-image: radial-gradient(rgb(244, 237, 41),rgb(244, 244, 117),transparent 60%);
+#moon {
+    background-image: radial-gradient(rgb(244, 244, 236),rgb(255, 255, 255),transparent 60%);
     width: 200px;
     height: 200px;
     transform: translateZ(-20px);
@@ -30,6 +31,19 @@
     right: 0px;
     top: auto;
     bottom: 0px;
+    perspective-origin: inherit;
+}
+#sun {
+    background-image: radial-gradient(rgb(244, 237, 41),rgb(244, 244, 117),transparent 60%);
+    width: 500px;
+    height: 500px;
+    transform: translateZ(-200px);
+    position: absolute;
+    left: auto;
+    right: 0px;
+    top: 0px;
+    bottom: auto;
+    perspective-origin: inherit;
 }
 .search-result-searchbar-div {
     width:fit-content;
@@ -41,4 +55,10 @@
 .search-result-google-div {
     margin-top: 15px;
     margin-left: 15px;
+}
+#bluesky-search-result-list-div {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 180px;
 }

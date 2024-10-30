@@ -49,15 +49,16 @@ function createTrie(words) {
     }
     return root
 }
-
 function SearchBar({prevSearchTerm=""}) {
-    const SEARCH_PROMPTS = ["Why is the sky blue", "I think I'm happy", "Crowdstrike"]
+    const SEARCH_PROMPTS = ["why is the sky blue", "i think im happy", "crowdstrike"]
     var trieRoot = createTrie(SEARCH_PROMPTS)
     const [searchTerm, setSearchTerm] = useState(prevSearchTerm)
     const [suggested, setSuggested] = useState<string[]>(trieRoot.search(searchTerm))
     const [searchActive, setSearchActive] = useState(false)
     const [handleSubmit, setHandleSubmit] = useState(false)
-    const [navigateDestination,setNavigateDestination] = useState("")
+    const [wrongSearch, setWrongSearch] = useState(false)
+    const [impoliteSearch, setImpoliteSearch] = useState(false)
+    const [learnedPlease, setLearnedPlease] = useState(false)
     const navigate = useNavigate();
     const handleInputChange = (event) => {
         setSearchTerm(event.target.value);
@@ -65,8 +66,21 @@ function SearchBar({prevSearchTerm=""}) {
     };
     useEffect(() => {
         if (handleSubmit) {
-            navigate("/"+encodeLink(navigateDestination),{state: {searchTerm: searchTerm}})
             setHandleSubmit(false)
+            setWrongSearch(true)
+            for (let prompt of SEARCH_PROMPTS) {
+                console.log(prompt+" "+searchTerm.toLowerCase().indexOf(prompt.toLowerCase())+" "+searchTerm.toLowerCase().indexOf("please"))
+                if (searchTerm.toLowerCase().indexOf("please") >= 0 && searchTerm.toLowerCase().indexOf(prompt.toLowerCase()) >= 0) {
+                    setImpoliteSearch(false)
+                    setWrongSearch(false)
+                    setLearnedPlease(true)
+                    navigate("/"+encodeLink(prompt),{state: {searchTerm: searchTerm}})
+                }
+                if (searchTerm.toLowerCase().indexOf("please") < 0 && searchTerm.toLowerCase().indexOf(prompt.toLowerCase()) >= 0) {
+                    setImpoliteSearch(true)
+                    setWrongSearch(false)
+                }
+            }
         }
     })
     const handleSearchActive = (event) => {
@@ -103,20 +117,15 @@ function SearchBar({prevSearchTerm=""}) {
         if (event.target?.className == "suggestion" 
             || event.target?.className == "suggestion-text") {
             setHandleSubmit(true)
-            setNavigateDestination(event.target?.innerText)
+            setSearchTerm(event.target?.innerText)
         } else if (event.target?.className == "suggestion-search-icon") {
             setHandleSubmit(true)
             setSearchTerm(event.target?.nextSibling.innerText)
-            setNavigateDestination(event.target?.nextSibling.innerText)
         }
     })
     document.addEventListener("keydown", function(event) {
         if (event.code == "Enter") {
             setHandleSubmit(true)
-            let searchBarText = document.getElementById("search-bar-text")
-            if (searchBarText) {
-                setNavigateDestination(searchBarText.innerText)
-            }
         }
     })
     function encodeLink(name) {
@@ -149,6 +158,12 @@ function SearchBar({prevSearchTerm=""}) {
                     <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
                     </svg>
                 </button>
+                {learnedPlease ?
+                    <>
+                        <input id="please-button" type="checkbox"/>
+                        <div id="please-button-text">Please</div>
+                    </> : null
+                }
             </div>
             {
             searchActive ?
@@ -180,6 +195,8 @@ function SearchBar({prevSearchTerm=""}) {
             </div> : null
             }
         </div>
+        {wrongSearch ? <div className="search-error">That's not a valid search prompt</div>:null}
+        {impoliteSearch ? <div className="search-error">That's not very polite</div>:null}
     </div>
     )
 }

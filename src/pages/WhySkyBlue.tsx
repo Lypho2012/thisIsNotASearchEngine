@@ -3,13 +3,38 @@ import "./WhySkyBlue.css"
 import SearchBar from './components/SearchBar.tsx'
 import Google from './components/Google.tsx'
 import SearchCategories from './components/SearchCategories.tsx'
+import SearchResult from './components/SearchResult.tsx'
 
 function WhySkyBlue() {
-  const search_results = [{link_name:"",link:"",summary:""}]
+  const search_results = [
+    {
+      link_name:"Why is the sky blue?",
+      link:"",
+      summary:"Experts have been wondering for a few days about this big question."
+    },
+    {
+      link_name:"Why is the sky blue - Denis Martindale",
+      link:"",
+      summary:"Now I know why the sky is blue..."
+    },
+    {
+      link_name:"Name",
+      link:"",
+      summary:"Summary"
+    },
+  ]
   useEffect(() => {
     let google_letters = document.getElementsByClassName("Google-letter")
     for (let google_letter of google_letters) {
       google_letter.style.fontSize = "30px"
+    }
+  })
+
+  document.addEventListener("scroll", (event) => {
+    let blueskyDiv = document.getElementById("bluesky-div")
+    if (blueskyDiv) {
+      let filter = Math.sin(window.scrollY)
+      blueskyDiv.style.filter = "brightness("+filter+")"
     }
   })
   
@@ -24,10 +49,13 @@ function WhySkyBlue() {
         </div>
         <SearchCategories/>
         <div id="bluesky-search-result-list-div">
-          {}
+          {search_results.map((search_result) => {
+            return (<SearchResult link={search_result.link} link_name={search_result.link_name} summary={search_result.summary}/>)
+          })}
         </div>
       </div>
       <div id="sun"></div>
+      <div id="moon"></div>
     </div>
   )
 }
