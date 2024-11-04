@@ -14,13 +14,8 @@ function WhySkyBlue() {
     },
     {
       link_name:"Why is the sky blue - Denis Martindale",
-      link:"",
+      link:"poem",
       summary:"Now I know why the sky is blue..."
-    },
-    {
-      link_name:"Name",
-      link:"",
-      summary:"Summary"
     },
   ]
   useEffect(() => {
