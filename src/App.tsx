@@ -7,6 +7,7 @@ import Poem from './pages/whyskybluepages/Poem.tsx'
 import { Routes, Route, BrowserRouter} from 'react-router-dom'
 import React from 'react';
 import About from './pages/About.tsx';
+import Emoji from './pages/happypages/Emoji.tsx';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/why+is+the+sky+blue" element={<WhySkyBlue/>}/>
           <Route path="/why+is+the+sky+blue/poem" element={<Poem/>}/>
           <Route path="/i+think+im+happy" element={<ImHappy/>}/>
+          <Route path="/i+think+im+happy/:emoji" element={<Emoji/>}/>
           <Route path="/crowdstrike" element={<Crowdstrike/>}/>
           <Route path="/about" element={<About/>}/>
         </Routes>

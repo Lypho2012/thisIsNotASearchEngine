@@ -1,0 +1,14 @@
+.emoji-row {
+    display: flex;
+    flex-direction: row;
+}
+.emoji-element {
+    padding: 20px;
+}
+#emoji-div {
+    width: 100%;
+    height: 100%;
+    background-color: yellow;
+    font-size: 60px;
+    padding: 20px;
+}
