@@ -8,6 +8,8 @@ import { Routes, Route, BrowserRouter} from 'react-router-dom'
 import React from 'react';
 import About from './pages/About.tsx';
 import Emoji from './pages/happypages/Emoji.tsx';
+import WhatDay from './pages/WhatDay.tsx';
+import DisplayDay from './pages/whatdaypages/DisplayDay.tsx';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
           <Route path="/i+think+im+happy/:emoji" element={<Emoji/>}/>
           <Route path="/crowdstrike" element={<Crowdstrike/>}/>
           <Route path="/about" element={<About/>}/>
+          <Route path="/what+day+is+it+today" element={<WhatDay/>}/>
+          <Route path="/what+day+is+it+today/:date" element={<DisplayDay/>}/>
         </Routes>
     </div>
     </BrowserRouter>

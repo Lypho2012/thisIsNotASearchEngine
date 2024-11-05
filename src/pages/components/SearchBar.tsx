@@ -50,8 +50,8 @@ function createTrie(words) {
     return root
 }
 function SearchBar({prevSearchTerm=""}) {
-    const SEARCH_PROMPTS = ["why is the sky blue", "i think im happy", "crowdstrike"]
-    var trieRoot = createTrie(SEARCH_PROMPTS)
+    const SEARCH_PROMPTS = ["why is the sky blue", "i think im happy", "crowdstrike", "what day is it today"]
+    const trieRoot = createTrie(SEARCH_PROMPTS)
     const [searchTerm, setSearchTerm] = useState(prevSearchTerm)
     const [suggested, setSuggested] = useState<string[]>(trieRoot.search(searchTerm))
     const [searchActive, setSearchActive] = useState(false)
