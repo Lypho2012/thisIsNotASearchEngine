@@ -42,6 +42,11 @@ function ImHappy() {
       link:"❄️",
       summary:"❄️❄️❄️"
     },
+    {
+      link_name:"🍗",
+      link:"🍗",
+      summary:"🍗🍗🍗"
+    }
   ]
   useEffect(() => {
     let google_letters = document.getElementsByClassName("Google-letter")

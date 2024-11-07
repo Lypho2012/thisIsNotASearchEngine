@@ -22,3 +22,60 @@
     font-family: "disney";
     src: url("./DansDisney-3nJ8.ttf") format('truetype');
 }
+
+#unknown-day-div {
+    background: radial-gradient(white, black);
+    height: 100vh;
+    width: 100vw;
+	animation: bounce 10s linear infinite;
+    background-size: 200%;
+    color: white;
+    padding-top: 100px;
+    font-size: 50px;
+    font-family:verdana;
+}
+@keyframes bounce {
+	0% {
+        background-position: 0% 0%;
+	}
+    33% {
+        background-position: 100% 0%;
+    }
+    66% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 100%;
+    }
+}
+
+:root {
+    --width: 200px;
+    --x-speed: 3s;
+    --y-speed: 7s;
+    --transition-speed: 2.2s;
+}
+
+.thinking-emoji { 
+    width: var(--width);
+    height: var(--width);
+    font-size: var(--width);
+}
+
+.x {
+    animation: x var(--x-speed) linear infinite alternate;
+}
+.y {
+    animation: y var(--y-speed) linear infinite alternate;
+}
+
+@keyframes x {
+    100% {
+        transform: translateX(calc(100vw - var(--width)*2));
+    }
+}
+@keyframes y {
+    100% {
+        transform: translateY(calc(100vh - var(--width)*2));
+    }
+}

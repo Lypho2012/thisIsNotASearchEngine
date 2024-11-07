@@ -21,6 +21,11 @@ function Emoji() {
             if (emojidiv) {
                 emojidiv.style.backgroundColor = "rgb(255, 207, 225)"
             }
+        } else if (emoji == "🍗") {
+            const emojidiv = document.getElementById("emoji-div")
+            if (emojidiv) {
+                emojidiv.style.backgroundColor = "rgb(0, 105, 56)"
+            }
         }
     })
     return (

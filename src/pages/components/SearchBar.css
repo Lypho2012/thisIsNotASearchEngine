@@ -7,12 +7,13 @@
     border-radius: 0 0 25px 25px;
     border-color: rgba(0, 0, 0, 0.1);
     border-width: 1px;
-    overflow: auto;
+    overflow: scroll;
     height: fit-content;
     min-height: 10px;
     max-height: 115px;
     background-color: white;
     scrollbar-width: none;
+    z-index: 100;
 }
 .suggestion {
     text-align: left;
@@ -47,6 +48,7 @@
     border-radius: 25px;
     box-shadow: none;
     margin: auto;
+    z-index: 100;
 }
 #search-bar {
     border: solid;

@@ -12,6 +12,30 @@
 #what-day-search-result-list-div {
     display: flex;
     flex-direction: column;
-    position: absolute;
-    left: 180px;
+    padding-left: 180px;
+}
+.horizontal {
+    display: flex;
+    flex-direction: row;
+}
+#schedule-div {
+    width: 300px;
+    border-left:solid rgb(0,0,0,0.2);
+    margin: 20px;
+}
+#schedule-images-div {
+    width: 110%;
+    border-bottom:solid rgb(0,0,0,0.2);
+}
+.schedule-item {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    width: 100%;
+}
+.schedule-time {
+    padding-right: auto;
+}
+.schedule-event {
+    margin-left: auto;
 }
