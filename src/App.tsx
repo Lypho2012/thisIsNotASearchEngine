@@ -23,8 +23,8 @@ function App() {
           <Route path="/i+think+im+happy/:emoji" element={<Emoji/>}/>
           <Route path="/crowdstrike" element={<Crowdstrike/>}/>
           <Route path="/about" element={<About/>}/>
-          <Route path="/hm+what+day+is+it+today" element={<WhatDay/>}/>
-          <Route path="/hm+what+day+is+it+today/:date" element={<DisplayDay/>}/>
+          <Route path="/what+day+is+it+today" element={<WhatDay/>}/>
+          <Route path="/what+day+is+it+today/:date" element={<DisplayDay/>}/>
         </Routes>
     </div>
     </BrowserRouter>

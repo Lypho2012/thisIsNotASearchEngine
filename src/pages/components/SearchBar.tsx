@@ -3,28 +3,45 @@ import { useNavigate } from 'react-router-dom'
 import "./SearchBar.css"
 
 class Node {
-    children: Map<string, any>
+    children: Map<string, Node[]>
     constructor() {
         this.children = new Map()
     }
     add(word: string) {
-        let cur = this
+        let cur: Node = this
         for (let i=0; i<word.length; i++) {
-            cur.children.set(word[i].toLowerCase(),new Node())
-            cur = cur.children.get(word[i].toLowerCase())
+            if (!cur.children.get(word[i].toLowerCase())) {
+                cur.children.set(word[i].toLowerCase(),[])
+            }
+            let next = new Node()
+            cur.children.get(word[i].toLowerCase())?.push(next)
+            cur = next
         }
     }
     search(word: string) {
-        let cur = this
+        /*
+        For each character in a string, find all the nodes that are the children from the current node
+        that start with that character, then repeat
+         */
+        let curChar:Node[] = []
+        let nextChar:Node[] = []
+        nextChar.push(this)
         for (let i=0; i<word.length; i++) {
-            if (!cur.children.get(word[i].toLowerCase())) return []
-            cur = cur.children.get(word[i].toLowerCase())
+            curChar = nextChar
+            nextChar = []
+            if (curChar.length == 0) return []
+            while (curChar.length > 0) {
+                let cur = curChar.shift()
+                for (let child of cur.children.get(word[i].toLowerCase()) || []) {
+                    nextChar.push(child)
+                }
+            }
         }
         let results: string[] = []
-        for (let [child,val] of cur.children) {
-            let curResults = val.getWords()
+        for (let child of nextChar) {
+            let curResults = child.getWords()
             for (let result of curResults) {
-                results.push(word+child+result)
+                results.push(word+result)
             }
         }
         return results
@@ -32,10 +49,12 @@ class Node {
     getWords() {
       if (this.children.size == 0) return [""]
       let result: string[] = []
-      for (let [child,val] of this.children) {
-        let cur = val.getWords()
-        for (let word of cur) {
-            result.push(child+word)
+      for (let [char,val] of this.children) {
+        for (let child of val) {
+            let cur = child.getWords()
+            for (let word of cur) {
+                result.push(char+word)
+            }
         }
       }
       return result
@@ -50,7 +69,7 @@ function createTrie(words) {
     return root
 }
 function SearchBar({prevSearchTerm=""}) {
-    const SEARCH_PROMPTS = ["why is the sky blue", "i think im happy", "crowdstrike", "hm what day is it today"]
+    const SEARCH_PROMPTS = ["why is the sky blue", "i think im happy", "crowdstrike", "what day is it today"]
     const trieRoot = createTrie(SEARCH_PROMPTS)
     const [searchTerm, setSearchTerm] = useState(prevSearchTerm)
     const [suggested, setSuggested] = useState<string[]>(trieRoot.search(searchTerm))
