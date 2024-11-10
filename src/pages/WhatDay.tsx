@@ -44,7 +44,7 @@ function WhatDay() {
         },
         6:{}
     }
-    // today.getDay() return 0 to 6 for monday through sunday
+    // today.getDay() return 0 to 6 for sunday through saturday
     useEffect(() => {
         const intervalId = setInterval(() => {
             setToday(new Date())

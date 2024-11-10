@@ -1,0 +1,31 @@
+#virus-div {
+    background-color: black;
+    height: 100vh;
+    padding: 100px;
+    padding-top: 200px;
+}
+#virus-header {
+    font-size: 70px;
+    display: flex;
+    flex-direction: row;
+    color: red;
+    padding-left: 350px;
+    margin-bottom: 40px;
+}
+#virus-warning {
+    font-size: 30px;
+    color: red;
+    margin-bottom: 20px;
+}
+#virus-button {
+    color: white;
+    background-color: rgb(7, 181, 4);
+    border-radius: 5px;
+    border: none;
+    padding: 15px;
+    font-size: 30px;
+    margin: 20px;
+}
+#virus-button:hover {
+    cursor: pointer;
+}

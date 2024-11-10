@@ -78,6 +78,9 @@ function SearchBar({prevSearchTerm=""}) {
     const [wrongSearch, setWrongSearch] = useState(false)
     const [impoliteSearch, setImpoliteSearch] = useState(false)
     const [learnedPlease, setLearnedPlease] = useState(false)
+    const [badSearchCount, setBadSearchCount] = useState(0)
+    const impoliteSearchHints = ["That's not very polite","Have you tried saying please?","You know what the magic word is"]
+    const [impoliteSearchHint, setImpoliteSearchHint] = useState("")
     const navigate = useNavigate();
     const handleInputChange = (event) => {
         setSearchTerm(event.target.value);
@@ -88,7 +91,6 @@ function SearchBar({prevSearchTerm=""}) {
             setHandleSubmit(false)
             setWrongSearch(true)
             for (let prompt of SEARCH_PROMPTS) {
-                console.log(prompt+" "+searchTerm.toLowerCase().indexOf(prompt.toLowerCase())+" "+searchTerm.toLowerCase().indexOf("please"))
                 if (searchTerm.toLowerCase().indexOf("please") >= 0 && searchTerm.toLowerCase().indexOf(prompt.toLowerCase()) >= 0) {
                     setImpoliteSearch(false)
                     setWrongSearch(false)
@@ -97,9 +99,19 @@ function SearchBar({prevSearchTerm=""}) {
                 }
                 if (searchTerm.toLowerCase().indexOf("please") < 0 && searchTerm.toLowerCase().indexOf(prompt.toLowerCase()) >= 0) {
                     setImpoliteSearch(true)
+                    setImpoliteSearchHint(impoliteSearchHints[Math.floor(Math.random()*impoliteSearchHints.length)])
                     setWrongSearch(false)
                 }
             }
+            setTimeout(() => {
+                setBadSearchCount(badSearchCount+1)
+                console.log(badSearchCount)
+            },1000)
+        }
+    })
+    useEffect(() => {
+        if (badSearchCount >= 4) {
+            navigate("/virus")
         }
     })
     const handleSearchActive = (event) => {
@@ -215,7 +227,7 @@ function SearchBar({prevSearchTerm=""}) {
             }
         </div>
         {wrongSearch ? <div className="search-error">That's not a valid search prompt</div>:null}
-        {impoliteSearch ? <div className="search-error">That's not very polite</div>:null}
+        {impoliteSearch ? <div className="search-error">{impoliteSearchHint}</div>:null}
     </div>
     )
 }

@@ -1,71 +1,46 @@
 # This is not a Search Engine
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+To run this project, execute
 
-## Available Scripts
+`npm start`
 
-In the project directory, you can run:
+and open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-### `npm start`
+## Why is this not a search engine?
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The purpose of this website was to mimic the Google search engine. You might've been fooled if you didn't look twice!
+The home page looks nearly identical to the Google search page. At the current production stage, most of the buttons are just for decoration and not functional.
+The search bar is one of the few functional components. You can search up anything that is in the (limited) database. The search algorithm was implemented using a prefix trie, so the beginning of your search prompt must match exactly what is in the database. The suggestions that show up when you haven't typed anything are all the options you can try. However, you might've noticed that that isn't enough to get your query to go through. Have you tried using the magic word? (Scroll to the bottom of the README for the magic word)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Where are my Wikipedia results!?
 
-### `npm test`
+That's right. The purpose of this website was not to provide you on information about your query, but rather to display a cool idea I had inspired by it. So far, this is the comprehensive list of all of the searches:
+> [why is the sky blue](#why-is-the-sky-blue)
+> [i think im happy](#i-think-im-happy)
+> [crowdstrike](#crowdstrike)
+> [what day is it today](#what-day-is-it-today)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Why is the sky blue
 
-### `npm run build`
+Perhaps one of the most searched questions. That's why it deserved a page in the first working version of this website. This page uses parallax to show a sun rising as you scroll down the page. The 2nd search result takes you to a poem.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## I think im happy
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+One of my favorite shirts has this written on it. In honor of this shirt, this page is filled with the most vibrant expression of happiness: emojis! Clicking on any of the search results takes you to a page filled with emojis with matching backgrounds.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Crowdstrike
 
-### `npm run eject`
+One of the biggest tech failures of 2024, the blue screen of death. This page mimics the error screen that popped up on millions of Windows devices and also includes a QR code for the Wikipedia article about this iconic event.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## What day is it today
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+I hope you know what day it is today. It's ok if you don't because this website will display your schedule for you. Well, it just has my schedule for now... 
+Clicking on any search result will lead you either to a special page celebrating the occasion if that day was a holiday (there's only a page celebrating birthdays for now), or a page representing my confusion at why you would think anything would happen that day.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Magic word
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Did you scroll here for the magic word? I'm disappointed that you haven't learned to say this whenever you ask someone for help. Of course search engines have feelings too! It won't help you until you say "please".
 
-## Learn More
+## Secret page
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Did you stumble upon something strange when you entered invalid searches too many times? Don't worry, you aren't stuck. This page was just designed to give you a little panic that something might've gone wrong. It doesn't actually do anything harmful to your computer. 

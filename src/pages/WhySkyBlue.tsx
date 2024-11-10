@@ -50,7 +50,7 @@ function WhySkyBlue() {
         </div>
       </div>
       <div id="sun"></div>
-      <div id="moon"></div>
+      {/*<div id="moon"></div>*/}
     </div>
   )
 }
