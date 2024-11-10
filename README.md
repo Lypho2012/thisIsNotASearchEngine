@@ -1,6 +1,6 @@
 # This is not a Search Engine
 
-To visit this site, go to [https://lypho2012.github.io/thisIsNotASearchEngine/] (https://lypho2012.github.io/thisIsNotASearchEngine/).
+To visit this site, go to [https://lypho2012.github.io/thisIsNotASearchEngine/](https://lypho2012.github.io/thisIsNotASearchEngine/).
 
 ## Why is this not a search engine?
 
