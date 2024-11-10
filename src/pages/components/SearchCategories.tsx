@@ -4,8 +4,9 @@ import "./SearchCategories.css"
 function SearchCategories() {
     const categories = ["search-category-all","search-category-images","search-category-videos","search-category-shopping","search-category-news","search-category-forums","search-category-web"]
     const [selectedCategory, setSelectedCategory] = useState("all")
-    const handleChooseCategory = (event) => {
-        setSelectedCategory(event.target.innerText.toLowerCase())
+    const handleChooseCategory = (event: React.MouseEvent<HTMLButtonElement>) => {
+        const target = event.target as HTMLElement
+        setSelectedCategory(target.innerText.toLowerCase())
     }
     useEffect(() => {
         for (let category of categories) {

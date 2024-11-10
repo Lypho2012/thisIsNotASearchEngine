@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
-import Google from './components/Google.tsx'
-import SearchBar from './components/SearchBar.tsx'
-import SearchCategories from './components/SearchCategories.tsx'
-import SearchResult from './components/SearchResult.tsx'
+import Google from './components/Google'
+import SearchBar from './components/SearchBar'
+import SearchCategories from './components/SearchCategories'
+import SearchResult from './components/SearchResult'
 import "./ImHappy.css"
 
 function ImHappy() {
@@ -51,7 +51,8 @@ function ImHappy() {
   useEffect(() => {
     let google_letters = document.getElementsByClassName("Google-letter")
     for (let google_letter of google_letters) {
-      google_letter.style.fontSize = "30px"
+      const google_letter_element = google_letter as HTMLElement
+      google_letter_element.style.fontSize = "30px"
     }
   })
   return (

@@ -5,20 +5,21 @@ import { useNavigate } from 'react-router-dom'
 function Google() {
     const navigate = useNavigate()
     document.addEventListener("click", (event) => {
-        if (event.target?.id == "Google-header" || event.target?.className == "Google-letter") {
+        const target = event.target as HTMLElement
+        if (target?.id == "Google-header" || target?.className == "Google-letter") {
             navigate("/")
         }
     })
-  return (
-    <div id="Google-header">
-        <div id="big-g-letter" className="Google-letter">G</div>
-        <div id="first-o-letter" className="Google-letter">o</div>
-        <div id="second-o-letter" className="Google-letter">o</div>
-        <div id="little-g-letter" className="Google-letter">g</div>
-        <div id="l-letter" className="Google-letter">l</div>
-        <div id="e-letter" className="Google-letter">e</div>
-    </div>
-  )
+    return (
+        <div id="Google-header">
+            <div id="big-g-letter" className="Google-letter">G</div>
+            <div id="first-o-letter" className="Google-letter">o</div>
+            <div id="second-o-letter" className="Google-letter">o</div>
+            <div id="little-g-letter" className="Google-letter">g</div>
+            <div id="l-letter" className="Google-letter">l</div>
+            <div id="e-letter" className="Google-letter">e</div>
+        </div>
+    )
 }
 
 export default Google

@@ -2,11 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import "./SearchResult.css"
 
-function SearchResult({link,link_name,summary}) {
+function SearchResult(state:{link:string ,link_name:string,summary:string}) {
   return (
     <div className="search-result">
-        <Link className="search-result-link" to={link}>{link_name}</Link>
-        <p className="search-result-summary">{summary}</p>
+        <Link className="search-result-link" to={state.link}>{state.link_name}</Link>
+        <p className="search-result-summary">{state.summary}</p>
     </div>
   )
 }

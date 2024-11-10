@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import "./WhySkyBlue.css"
-import SearchBar from './components/SearchBar.tsx'
-import Google from './components/Google.tsx'
-import SearchCategories from './components/SearchCategories.tsx'
-import SearchResult from './components/SearchResult.tsx'
+import SearchBar from './components/SearchBar'
+import Google from './components/Google'
+import SearchCategories from './components/SearchCategories'
+import SearchResult from './components/SearchResult'
 
 function WhySkyBlue() {
   const search_results = [
@@ -21,7 +21,8 @@ function WhySkyBlue() {
   useEffect(() => {
     let google_letters = document.getElementsByClassName("Google-letter")
     for (let google_letter of google_letters) {
-      google_letter.style.fontSize = "30px"
+      const google_letter_element = google_letter as HTMLElement
+      google_letter_element.style.fontSize = "30px"
     }
   })
 

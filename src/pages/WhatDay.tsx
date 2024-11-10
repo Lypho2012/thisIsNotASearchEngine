@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import Google from './components/Google.tsx'
-import SearchBar from './components/SearchBar.tsx'
-import SearchCategories from './components/SearchCategories.tsx'
-import SearchResult from './components/SearchResult.tsx'
+import Google from './components/Google'
+import SearchBar from './components/SearchBar'
+import SearchCategories from './components/SearchCategories'
+import SearchResult from './components/SearchResult'
 import "./WhatDay.css"
 
 function WhatDay() {
     const [today, setToday] = useState(new Date())
     const [yesterday, setYesterday] = useState(new Date())
     const [tomorrow, setTomorrow] = useState(new Date())
-    const weeklySchedule = {
+    const weeklySchedule: Record<number,Record<string,string>> = {
         0:{},
         1:{
             "9:30am":"ICS 32 Lab",
@@ -74,7 +74,8 @@ function WhatDay() {
     useEffect(() => {
         let google_letters = document.getElementsByClassName("Google-letter")
         for (let google_letter of google_letters) {
-            google_letter.style.fontSize = "30px"
+            const google_letter_element = google_letter as HTMLElement
+            google_letter_element.style.fontSize = "30px"
         }
     })
     return (
@@ -98,7 +99,7 @@ function WhatDay() {
                     
                 </div>
                 <div>
-                    {Object.keys(weeklySchedule[today.getDay()]).length == 0 ? (
+                    {Object.keys(weeklySchedule[today.getDay()] as Record<string,string>).length == 0 ? (
                         <div>Looks like nothing much is happening today!</div>
                     ): (
                         Object.entries(weeklySchedule[today.getDay()]).map(([key,value]) => {

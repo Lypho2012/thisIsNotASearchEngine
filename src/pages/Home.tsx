@@ -1,8 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import './Home.css'
-import SearchBar from './components/SearchBar.tsx'
-import Google from './components/Google.tsx'
+import SearchBar from './components/SearchBar'
+import Google from './components/Google'
 
 function Home() {
     let google_letters = document.getElementsByClassName("Google-letter")

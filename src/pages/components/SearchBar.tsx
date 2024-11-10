@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import "./SearchBar.css"
 
@@ -32,6 +32,7 @@ class Node {
             if (curChar.length == 0) return []
             while (curChar.length > 0) {
                 let cur = curChar.shift()
+                if (!cur) continue
                 for (let child of cur.children.get(word[i].toLowerCase()) || []) {
                     nextChar.push(child)
                 }
@@ -49,7 +50,9 @@ class Node {
     getWords() {
       if (this.children.size == 0) return [""]
       let result: string[] = []
-      for (let [char,val] of this.children) {
+      for (let char of this.children.keys()) {
+        const val = this.children.get(char)
+        if (!val) continue
         for (let child of val) {
             let cur = child.getWords()
             for (let word of cur) {
@@ -61,7 +64,7 @@ class Node {
     }
 }
   
-function createTrie(words) {
+function createTrie(words:string[]) {
     var root = new Node()
     for (let word of words) {
         root.add(word)
@@ -82,9 +85,11 @@ function SearchBar({prevSearchTerm=""}) {
     const impoliteSearchHints = ["That's not very polite","Have you tried saying please?","You know what the magic word is"]
     const [impoliteSearchHint, setImpoliteSearchHint] = useState("")
     const navigate = useNavigate();
-    const handleInputChange = (event) => {
-        setSearchTerm(event.target.value);
-        handleSearchActive(event)
+    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+        if (event.target) {
+            setSearchTerm(event.target.value);
+            handleSearchActive(event)
+        }
     };
     useEffect(() => {
         if (handleSubmit) {
@@ -114,9 +119,10 @@ function SearchBar({prevSearchTerm=""}) {
             navigate("/virus")
         }
     })
-    const handleSearchActive = (event) => {
+    const handleSearchActive = (event: Event | ChangeEvent<HTMLInputElement>) => {
         setSuggested(trieRoot.search(searchTerm))
-        if (event.target?.id == "search-bar-text") {
+        const target = event.target as HTMLElement
+        if (target?.id == "search-bar-text") {
             let searchBar = document.getElementById("search-bar")
             if (!searchBar) {searchBar = document.getElementById("search-bar-active")}
             if (searchBar) {
@@ -145,13 +151,15 @@ function SearchBar({prevSearchTerm=""}) {
     }
     document.addEventListener("click", function(event) {
         handleSearchActive(event)
-        if (event.target?.className == "suggestion" 
-            || event.target?.className == "suggestion-text") {
+        const target = event.target as HTMLElement
+        if (target?.className == "suggestion" 
+            || target?.className == "suggestion-text") {
             setHandleSubmit(true)
-            setSearchTerm(event.target?.innerText)
-        } else if (event.target?.className == "suggestion-search-icon") {
+            setSearchTerm(target?.innerText)
+        } else if (target?.className == "suggestion-search-icon") {
             setHandleSubmit(true)
-            setSearchTerm(event.target?.nextSibling.innerText)
+            const nextSibling = target.nextSibling as HTMLElement
+            setSearchTerm(nextSibling.innerText)
         }
     })
     document.addEventListener("keydown", function(event) {
@@ -159,10 +167,9 @@ function SearchBar({prevSearchTerm=""}) {
             setHandleSubmit(true)
         }
     })
-    function encodeLink(name) {
+    function encodeLink(name: string) {
         name = name.toLowerCase()
-        name = name.split(" ")
-        name = name.join("+")
+        name = name.split(" ").join("+")
         let res = ""
         for (let i=0; i<name.length; i++) {
             if (name[i].match(/^[0-9a-z]+$/)) {

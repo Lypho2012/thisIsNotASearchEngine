@@ -5,10 +5,10 @@ import Typewriter from "typewriter-effect"
 
 function DisplayDay() {
     const {date} = useParams()
-    const specialDates = {"11+10":"birthday","12+10":"birthday"}
+    const specialDates: Record<string,string> = {"11+10":"birthday","12+10":"birthday"}
     const month = date?.split("+")[0]
     const day = date?.split("+")[1]
-    if (month+"+"+day in specialDates && specialDates[month+"+"+day] == "birthday") {
+    if (month+"+"+day in specialDates && specialDates[month+"+"+day] as string == "birthday") {
         return (
             <div id="birthday-div">
                 <Typewriter 
