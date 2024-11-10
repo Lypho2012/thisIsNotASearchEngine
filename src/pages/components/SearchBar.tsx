@@ -110,7 +110,7 @@ function SearchBar({prevSearchTerm=""}) {
         }
     })
     useEffect(() => {
-        if (badSearchCount >= 4) {
+        if (badSearchCount >= 2) {
             navigate("/virus")
         }
     })
