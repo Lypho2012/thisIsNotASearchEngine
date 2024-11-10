@@ -14,7 +14,7 @@ import Virus from './pages/Virus.tsx';
 
 function App() {
   return (
-    <BrowserRouter >
+    <BrowserRouter>
     <div className="App">
         <Routes>
           <Route path="/" element={<Home/>}/>
