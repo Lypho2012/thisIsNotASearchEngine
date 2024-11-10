@@ -1,10 +1,6 @@
 # This is not a Search Engine
 
-To run this project, execute
-
-`npm start`
-
-and open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+To visit this site, go to [https://lypho2012.github.io/thisIsNotASearchEngine/] (https://lypho2012.github.io/thisIsNotASearchEngine/).
 
 ## Why is this not a search engine?
 
