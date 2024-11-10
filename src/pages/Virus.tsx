@@ -1,11 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Virus.css"
-import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import { useNavigate } from 'react-router-dom';
 
 function Virus() {
+    const [showMessage, setShowMessage] = useState(false)
+    const navigate = useNavigate()
     const handleVirusClick = () => {
-
+        setShowMessage(true)
+        const timeId = setTimeout(() => {
+            navigate("/")
+        }, 3000)
     }
     return (
         <div id="virus-div">
@@ -14,22 +19,10 @@ function Virus() {
                 <div>Warning!</div>
             </div>
             <div id="virus-warning">Your computer has been infected with a virus!</div>
-            <Popup trigger={<button id="virus-button">Click here to purge the virus</button>} modal nested>
-                {close => (
-                    <div className='modal'>
-                        <div className='content'>
-                            Welcome to GFG!!!
-                        </div>
-                        <div>
-                            <button onClick=
-                                {() => close()}>
-                                    Close modal
-                            </button>
-                        </div>
-                    </div>
-                )}
-            </Popup>
-            
+            <button id="virus-button" onClick={handleVirusClick}>Click here to purge the virus</button>
+            {showMessage ? <div id="purged-message">
+                Congrats! Your computer is safe now
+            </div> : null}
         </div>
     )
 }

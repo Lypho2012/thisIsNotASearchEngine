@@ -29,3 +29,15 @@
 #virus-button:hover {
     cursor: pointer;
 }
+#purged-message {
+    color:rgb(7, 181, 4);
+    animation: fadeIn 2s;
+}
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opactiy: 1;
+    }
+}
