@@ -5,7 +5,6 @@ import SearchBar from './components/SearchBar.tsx'
 import Google from './components/Google.tsx'
 
 function Home() {
-    console.log("home page loaded")
     let google_letters = document.getElementsByClassName("Google-letter")
     for (let google_letter of google_letters) {
         google_letter.setAttribute("font-size","100px")
