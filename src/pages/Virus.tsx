@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import "./Virus.css"
 import 'reactjs-popup/dist/index.css';
 import { useNavigate } from 'react-router-dom';
