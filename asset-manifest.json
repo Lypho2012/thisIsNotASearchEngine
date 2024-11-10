@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/thisIsNotASearchEngine/static/css/main.32278f80.css",
-    "main.js": "/thisIsNotASearchEngine/static/js/main.09f6a39b.js",
-    "static/js/453.2f565700.chunk.js": "/thisIsNotASearchEngine/static/js/453.2f565700.chunk.js",
-    "static/media/DansDisney-3nJ8.ttf": "/thisIsNotASearchEngine/static/media/DansDisney-3nJ8.24a65cd72f06a3740cff.ttf",
-    "index.html": "/thisIsNotASearchEngine/index.html",
-    "main.32278f80.css.map": "/thisIsNotASearchEngine/static/css/main.32278f80.css.map",
-    "main.09f6a39b.js.map": "/thisIsNotASearchEngine/static/js/main.09f6a39b.js.map",
-    "453.2f565700.chunk.js.map": "/thisIsNotASearchEngine/static/js/453.2f565700.chunk.js.map"
+    "main.css": "/static/css/main.3d27cd6e.css",
+    "main.js": "/static/js/main.66dca573.js",
+    "static/js/453.2f565700.chunk.js": "/static/js/453.2f565700.chunk.js",
+    "static/media/DansDisney-3nJ8.ttf": "/static/media/DansDisney-3nJ8.24a65cd72f06a3740cff.ttf",
+    "index.html": "/index.html",
+    "main.3d27cd6e.css.map": "/static/css/main.3d27cd6e.css.map",
+    "main.66dca573.js.map": "/static/js/main.66dca573.js.map",
+    "453.2f565700.chunk.js.map": "/static/js/453.2f565700.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.32278f80.css",
-    "static/js/main.09f6a39b.js"
+    "static/css/main.3d27cd6e.css",
+    "static/js/main.66dca573.js"
   ]
 }
