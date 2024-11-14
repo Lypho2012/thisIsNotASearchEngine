@@ -3,13 +3,15 @@
     height: 100vh;
     padding: 100px;
     padding-top: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 #virus-header {
     font-size: 70px;
     display: flex;
     flex-direction: row;
     color: red;
-    padding-left: 350px;
     margin-bottom: 40px;
 }
 #virus-warning {

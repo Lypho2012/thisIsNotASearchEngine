@@ -2,6 +2,9 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import "./SearchBar.css"
 
+// dependency note: also need to install @emotion/react and @emotion/styled when installing this package
+import Alert from '@mui/material/Alert'; 
+
 class Node {
     children: Map<string, Node[]>
     constructor() {
@@ -112,10 +115,14 @@ function SearchBar({prevSearchTerm=""}) {
                 setBadSearchCount(badSearchCount+1)
                 console.log(badSearchCount)
             },1000)
+            setTimeout(() => {
+                setImpoliteSearch(false);
+                setWrongSearch(false);
+            }, 5000)
         }
     })
     useEffect(() => {
-        if (badSearchCount >= 2) {
+        if (badSearchCount >= 3) {
             navigate("/virus")
         }
     })
@@ -233,8 +240,8 @@ function SearchBar({prevSearchTerm=""}) {
             </div> : null
             }
         </div>
-        {wrongSearch ? <div className="search-error">That's not a valid search prompt</div>:null}
-        {impoliteSearch ? <div className="search-error">{impoliteSearchHint}</div>:null}
+        {wrongSearch ? <Alert variant="filled" severity="error" className='search-error'>That's not a valid search prompt</Alert>:null}
+        {impoliteSearch ? <Alert variant="filled" severity="warning" className='search-error'>{impoliteSearchHint}</Alert>:null}
     </div>
     )
 }

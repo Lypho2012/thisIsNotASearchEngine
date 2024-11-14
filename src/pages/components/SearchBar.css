@@ -41,6 +41,9 @@
 #search-bar-div {
     padding: 20px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 #search-active-box-shadow {
     width:fit-content;
@@ -101,10 +104,16 @@
     cursor: pointer;
 }
 .search-error {
-    color: red;
-    padding: 10px;
+    margin: 10px;
+    width: 600px;
+    animation: shake 0.15s 2;
 }
 #please-button-text {
     margin: auto;
     padding-right: 20px;
+}
+@keyframes shake {
+    0% { transform: translate(0,0);}
+    50% {transform: translate(-1px,-1px);}
+    100% {transform: translate(1px,1px);}
 }
