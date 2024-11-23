@@ -1,0 +1,27 @@
+#birthday-div {
+	background: linear-gradient(-45deg, #eede52, #eeaa52, #c10a38,#bd0ffc, #23a6d5, #23d5ab, #eede52, #eeaa52, #c10a38,#bd0ffc, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 3s linear infinite;
+	height: 100vh;
+    font-size: 200px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    font-family: disney;
+    color: white;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	100% {
+		background-position: 100% 75%;
+	}
+}
+
+@font-face {
+    font-family: "disney";
+    src: url("./DansDisney-3nJ8.ttf") format('truetype');
+}

@@ -1,0 +1,28 @@
+#thanksgiving-div {
+    background-color: #d55823;
+    font-size: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-family: thanksgiving;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+}
+#thanksgiving-background-div {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    position: relative;
+}
+@font-face {
+    font-family: "thanksgiving";
+    src: url("./AutumnScenery-BLq98.ttf") format('truetype');
+}
+.leaf {
+    width: 70px;
+    position: absolute;
+}

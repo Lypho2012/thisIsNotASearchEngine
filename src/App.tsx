@@ -11,6 +11,7 @@ import Emoji from './pages/happypages/Emoji';
 import WhatDay from './pages/WhatDay';
 import DisplayDay from './pages/whatdaypages/DisplayDay';
 import Virus from './pages/Virus';
+import Birthday from './pages/whatdaypages/Birthday';
 
 function App() {
   return (
