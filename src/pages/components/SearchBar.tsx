@@ -1,9 +1,10 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import "./SearchBar.css"
 
 // dependency note: also need to install @emotion/react and @emotion/styled when installing this package
 import Alert from '@mui/material/Alert'; 
+import PleaseContext from '../contexts/please_context';
 
 class Node {
     children: Map<string, Node[]>
@@ -75,57 +76,83 @@ function createTrie(words:string[]) {
     return root
 }
 function SearchBar({prevSearchTerm=""}) {
-    const SEARCH_PROMPTS = ["why is the sky blue", "i think im happy", "crowdstrike", "what day is it today"]
+    const SEARCH_PROMPTS = [
+        "why is the sky blue", 
+        "i think im happy", 
+        "crowdstrike", 
+        "what day is it today",
+        "help me do some calculations"
+    ]
     const trieRoot = createTrie(SEARCH_PROMPTS)
     const [searchTerm, setSearchTerm] = useState(prevSearchTerm)
     const [suggested, setSuggested] = useState<string[]>(trieRoot.search(searchTerm))
     const [searchActive, setSearchActive] = useState(false)
-    const [handleSubmit, setHandleSubmit] = useState(false)
+
+    // bad searches
     const [wrongSearch, setWrongSearch] = useState(false)
     const [impoliteSearch, setImpoliteSearch] = useState(false)
-    const [learnedPlease, setLearnedPlease] = useState(false)
+    const {learned, setLearned} = useContext(PleaseContext)
     const [badSearchCount, setBadSearchCount] = useState(0)
     const impoliteSearchHints = ["That's not very polite","Have you tried saying please?","You know what the magic word is"]
     const [impoliteSearchHint, setImpoliteSearchHint] = useState("")
+    const [pleaseChecked, setPleaseChecked] = useState(false)
+
     const navigate = useNavigate();
+
+    // handle when search prompt is changed
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         if (event.target) {
             setSearchTerm(event.target.value);
             handleSearchActive(event)
         }
     };
-    useEffect(() => {
-        if (handleSubmit) {
-            setHandleSubmit(false)
-            setWrongSearch(true)
-            for (let prompt of SEARCH_PROMPTS) {
-                if (searchTerm.toLowerCase().indexOf("please") >= 0 && searchTerm.toLowerCase().indexOf(prompt.toLowerCase()) >= 0) {
-                    setImpoliteSearch(false)
+
+    const togglePlease = () => {
+        setPleaseChecked(!pleaseChecked)
+    }
+
+    // handle if user searched something up
+    const handleSubmit = () => {
+        setWrongSearch(true)
+        
+        // check if search includes "please"
+        const saidPlease = searchTerm.toLowerCase().indexOf("please") >= 0
+
+        // check which prompt was searched
+        for (let prompt of SEARCH_PROMPTS) {
+            if (searchTerm.toLowerCase().indexOf(prompt.toLowerCase()) >= 0) {
+                if (pleaseChecked || saidPlease) {
                     setWrongSearch(false)
-                    setLearnedPlease(true)
+                    setLearned(true)
                     navigate("/"+encodeLink(prompt),{state: {searchTerm: searchTerm}})
-                }
-                if (searchTerm.toLowerCase().indexOf("please") < 0 && searchTerm.toLowerCase().indexOf(prompt.toLowerCase()) >= 0) {
+                } else {
                     setImpoliteSearch(true)
                     setImpoliteSearchHint(impoliteSearchHints[Math.floor(Math.random()*impoliteSearchHints.length)])
                     setWrongSearch(false)
                 }
+                break
             }
+        }
+        if (wrongSearch || impoliteSearch) {
+            // increment bad search
             setTimeout(() => {
                 setBadSearchCount(badSearchCount+1)
-                console.log(badSearchCount)
             },1000)
+
+            // make bad search alerts go away
             setTimeout(() => {
                 setImpoliteSearch(false);
                 setWrongSearch(false);
             }, 5000)
         }
-    })
-    useEffect(() => {
-        if (badSearchCount >= 3) {
-            navigate("/virus")
-        }
-    })
+    }
+
+    // go to virus page if did bad searches too many times
+    if (badSearchCount >= 3) {
+        navigate("/virus")
+    }
+
+    // handle if the cursor is in the search bar
     const handleSearchActive = (event: Event | ChangeEvent<HTMLInputElement>) => {
         setSuggested(trieRoot.search(searchTerm))
         const target = event.target as HTMLElement
@@ -153,27 +180,35 @@ function SearchBar({prevSearchTerm=""}) {
             }
         }
     }
+
+    // handle clearing search bar
     const handleXInput = () => {
         setSearchTerm("")
     }
+
+    // handle when user clicks so that search bar expands and triggers event for when cursor is in search bar
     document.addEventListener("click", function(event) {
         handleSearchActive(event)
         const target = event.target as HTMLElement
         if (target?.className == "suggestion" 
             || target?.className == "suggestion-text") {
-            setHandleSubmit(true)
             setSearchTerm(target?.innerText)
+            handleSubmit()
         } else if (target?.className == "suggestion-search-icon") {
-            setHandleSubmit(true)
             const nextSibling = target.nextSibling as HTMLElement
             setSearchTerm(nextSibling.innerText)
+            handleSubmit()
         }
     })
+
+    // handle Enter as triggering submit event
     document.addEventListener("keydown", function(event) {
         if (event.code == "Enter") {
-            setHandleSubmit(true)
+            handleSubmit()
         }
     })
+
+    // encoding a search prompt for url
     function encodeLink(name: string) {
         name = name.toLowerCase()
         name = name.split(" ").join("+")
@@ -203,11 +238,11 @@ function SearchBar({prevSearchTerm=""}) {
                     <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
                     </svg>
                 </button>
-                {learnedPlease ?
-                    <>
-                        <input id="please-button" type="checkbox"/>
-                        <div id="please-button-text">Please</div>
-                    </> : null
+                {learned ?
+                    <div style={{display:"flex",flexDirection:"row"}}>
+                        <input id="please-button" type="checkbox" onClick={togglePlease}/>
+                        <label htmlFor="please_button" id="please-button-text">Please</label>
+                    </div> : null
                 }
             </div>
             {

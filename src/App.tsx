@@ -5,16 +5,20 @@ import ImHappy from './pages/ImHappy'
 import Crowdstrike from './pages/Crowdstrike'
 import Poem from './pages/whyskybluepages/Poem'
 import { Routes, Route, BrowserRouter} from 'react-router-dom'
-import React from 'react';
+import { useState } from 'react';
 import About from './pages/About';
 import Emoji from './pages/happypages/Emoji';
 import WhatDay from './pages/WhatDay';
 import DisplayDay from './pages/whatdaypages/DisplayDay';
 import Virus from './pages/Virus';
-import Birthday from './pages/whatdaypages/Birthday';
+import Calculations from './pages/Calculations';
+import PleaseContext from './pages/contexts/please_context';
 
 function App() {
+  const [learned, setLearned] = useState(false)
+
   return (
+    <PleaseContext.Provider value={{learned,setLearned}}>
     <BrowserRouter>
     <div className="App">
         <Routes>
@@ -28,9 +32,11 @@ function App() {
           <Route path="/what+day+is+it+today" element={<WhatDay/>}/>
           <Route path="/what+day+is+it+today/:date" element={<DisplayDay/>}/>
           <Route path="/virus" element={<Virus/>}/>
+          <Route path="/help+me+do+some+calculations" element={<Calculations/>}/>
         </Routes>
     </div>
     </BrowserRouter>
+    </PleaseContext.Provider>
   );
 }
 
