@@ -22,15 +22,11 @@
     width: 30px;
     margin: auto;
 }
-#left-arrow {
+.topbar-icons {
     width: 20px;
-    margin-top: 5px;
     filter: brightness(0) invert(1);
 }
 #right-arrow {
-    width: 20px;
-    margin-top: 5px;
-    filter: brightness(0) invert(1);
     rotate: 180deg;
 }
 #search {
@@ -41,4 +37,8 @@
     border: none;
     background: #4e5158;
     color: white;
+}
+#topbar-right {
+    margin-left: auto;
+    margin-top: 8px;
 }
