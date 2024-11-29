@@ -1,0 +1,44 @@
+#vscode-div {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    background-color: #282c34;
+}
+#topbar {
+    width: 100vw;
+    height: 40px;
+    background-color: #3c3f45;
+    display: flex;
+    flex-direction: row;
+}
+#topbar button {
+    background: none;
+    border: none;
+    color: white;
+    font-family: Verdana;
+}
+#vscode-logo {
+    width: 30px;
+    margin: auto;
+}
+#left-arrow {
+    width: 20px;
+    margin-top: 5px;
+    filter: brightness(0) invert(1);
+}
+#right-arrow {
+    width: 20px;
+    margin-top: 5px;
+    filter: brightness(0) invert(1);
+    rotate: 180deg;
+}
+#search {
+    width: 600px;
+    text-align: center;
+    margin: 5px;
+    border-radius: 7px;
+    border: none;
+    background: #4e5158;
+    color: white;
+}

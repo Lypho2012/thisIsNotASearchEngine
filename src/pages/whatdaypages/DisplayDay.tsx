@@ -8,6 +8,7 @@ import Halloween from './Halloween'
 function DisplayDay() {
     const {date} = useParams()
     const specialDates: Record<string,string> = {
+        "8+25":"birthday",
         "10+31":"halloween",
         "11+10":"birthday",
         "11+28":"thanksgiving",

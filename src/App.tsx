@@ -13,12 +13,16 @@ import DisplayDay from './pages/whatdaypages/DisplayDay';
 import Virus from './pages/Virus';
 import Calculations from './pages/Calculations';
 import PleaseContext from './pages/contexts/please_context';
+import Disguise from './pages/Disguise';
+import VSCode from './pages/disguisepages/VSCode';
+import ScrapedContext from './pages/contexts/scraped_context';
 
 function App() {
   const [learned, setLearned] = useState(false)
 
   return (
     <PleaseContext.Provider value={{learned,setLearned}}>
+    <ScrapedContext.Provider value={{data: [], setData: () => {}}}>
     <BrowserRouter>
     <div className="App">
         <Routes>
@@ -33,9 +37,12 @@ function App() {
           <Route path="/what+day+is+it+today/:date" element={<DisplayDay/>}/>
           <Route path="/virus" element={<Virus/>}/>
           <Route path="/help+me+do+some+calculations" element={<Calculations/>}/>
+          <Route path="/disguise+my+website" element={<Disguise/>}/>
+          <Route path="/disguise+my+website/vscode" element={<VSCode/>}/>
         </Routes>
     </div>
     </BrowserRouter>
+    </ScrapedContext.Provider>
     </PleaseContext.Provider>
   );
 }
