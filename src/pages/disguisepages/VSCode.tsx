@@ -6,6 +6,11 @@ import LayoutSidebarLeft from "./layout-sidebar-left.svg"
 import LayoutSidebarRight from "./layout-sidebar-right.svg"
 import LayoutPanel from "./layout-panel.svg"
 import Layout from "./layout.svg"
+import Files from "./files.svg"
+import Search from "./search.svg"
+import SourceControl from "./source-control.svg"
+import Debug from "./debug-alt.svg"
+import Extensions from "./extensions.svg"
 
 function VSCode() {
     const {data, setData} = useContext(ScrapedContext)
@@ -34,6 +39,13 @@ function VSCode() {
                     <button><img src={LayoutSidebarRight} alt="layout sidebar right" className="topbar-icons"/></button>
                     <button><img src={Layout} alt="layout" className="topbar-icons"/></button>
                 </div>
+            </div>
+            <div id="sidebar">
+                <button><img src={Files} alt="files" className="sidebar-icons"/></button>
+                <button><img src={Search} alt="search" className="sidebar-icons"/></button>
+                <button><img src={SourceControl} alt="source" className="sidebar-icons"/></button>
+                <button><img src={Debug} alt="debug" className="sidebar-icons"/></button>
+                <button><img src={Extensions} alt="extensions" className="sidebar-icons"/></button>
             </div>
         </div>
     )
