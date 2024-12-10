@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ScrapedContext from '../contexts/scraped_context'
 import "./VSCode.css"
 import LeftArrow from "./arrow-left.svg"
@@ -11,10 +11,26 @@ import Search from "./search.svg"
 import SourceControl from "./source-control.svg"
 import Debug from "./debug-alt.svg"
 import Extensions from "./extensions.svg"
+import PythonLogo from "./python.svg"
+import JupyterNotebookLogo from "./notebook.svg"
 
 function VSCode() {
     const {data, setData} = useContext(ScrapedContext)
+    const file_type_icons = {"py":PythonLogo,"ipynb":JupyterNotebookLogo}
     console.log(data)
+    const [files,setFiles] = useState({
+        "notebook.ipynb":{
+            "extension":"ipynb",
+            "path":["notebook.ipynb"]
+        },
+        "example.ipynb":{
+            "extension":"ipynb",
+            "path":["example.ipynb"]
+        }
+    })
+    const [activeTabs,setActiveTabs] = useState(["notebook.ipynb","example.ipynb"])
+    const [selectedTab,setSelectedTab] = useState(activeTabs[0])
+
     return (
         <div id="vscode-div">
             <div id="topbar">
@@ -52,9 +68,27 @@ function VSCode() {
                 </div>
                 <div id="middle-content">
                     <div id="file-tabs">
-                        <div className='file-tab'>
-                            filename.ipynb
-                        </div>
+                        {activeTabs.map((tab,index) => {
+                            if (selectedTab == tab) {
+                                return <div className='file-tab-selected' key={index}>
+                                    <img src={file_type_icons[files[tab].extension]} alt={files[tab].extension} className="filetype-icons"/>
+                                    <div className='file-tab-name'>{tab}</div>
+                                </div>
+                            } else {
+                                return <div className='file-tab' key={index}>
+                                    <img src={file_type_icons[files[tab].extension]} alt={files[tab].extension} className="filetype-icons"/>
+                                    <div className='file-tab-name'>{tab}</div>
+                                </div>
+                            }
+                        })}
+                    </div>
+                    <div id="file-path">
+                        {files[selectedTab].path.map((step) => {
+                            return <div className='file-path-step'>{step+" >"}</div>
+                        })}
+                    </div>
+                    <div id="file">
+                        {data}
                     </div>
                 </div>
             </div>

@@ -8,7 +8,7 @@
 #topbar {
     width: 100vw;
     height: 5vh;
-    background-color: #3c3f45;
+    background-color: rgb(60,60,60);
     display: flex;
     flex-direction: row;
 }
@@ -37,7 +37,7 @@
     margin: 5px;
     border-radius: 7px;
     border: none;
-    background: #4e5158;
+    background: rgb(70,70,70);
     color: white;
     font-size: 15px;
 }
@@ -48,8 +48,8 @@
 #sidebar {
     display: flex;
     flex-direction: column;
-    width: 4vw;
-    background: #34363c;
+    width: 5vw;
+    background: rgb(51,51,51);
     height: 100%;
 }
 #sidebar button {
@@ -63,17 +63,19 @@
     filter: brightness(0) invert(1);
     margin-top: 20px;
     margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 #sidebar-expanded {
     width: 20vw;
-    background-color: #25282d;
+    background-color: rgb(37,37,38);
     height: 100%;
 }
 #main-content {
     display: flex;
     flex-direction: row;
     height: 95vh;
-    background-color: #1e2127;
+    background-color: rgb(30,30,30);
 }
 #middle-content {
     display: flex;
@@ -92,6 +94,37 @@
     width:max-content;
     padding: 15px;
     color: white;
-    border-left: 1px solid black;
-    border-right: 1px solid black
+    border-left: 0.5px solid rgb(30,30,30);
+    border-right: 0.5px solid rgb(30,30,30);
+    display: flex;
+    flex-direction: row;
+}
+.file-tab-name {
+    margin-right: 5px;
+}
+.filetype-icons {
+    width: 25px;
+    filter: invert(82%) sepia(29%) saturate(2750%) hue-rotate(174deg) brightness(76%) contrast(85%);
+    margin-right: 5px;
+}
+.file-tab-selected {
+    width:max-content;
+    padding: 15px;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(30,30,30);
+}
+#file-path {
+    height: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(30,30,30);
+    box-shadow: 3px 5px 3px;
+    padding-left: 10px;
+}
+.file-path-step {
+    margin: 5px;
+    color: white;
 }
