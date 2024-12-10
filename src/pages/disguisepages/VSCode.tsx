@@ -69,26 +69,29 @@ function VSCode() {
                 <div id="middle-content">
                     <div id="file-tabs">
                         {activeTabs.map((tab,index) => {
+                            let file = files[tab as keyof typeof files]
                             if (selectedTab == tab) {
                                 return <div className='file-tab-selected' key={index}>
-                                    <img src={file_type_icons[files[tab].extension]} alt={files[tab].extension} className="filetype-icons"/>
+                                    <img src={file_type_icons[file.extension as keyof typeof file_type_icons]} alt={file.extension} className="filetype-icons"/>
                                     <div className='file-tab-name'>{tab}</div>
                                 </div>
                             } else {
                                 return <div className='file-tab' key={index}>
-                                    <img src={file_type_icons[files[tab].extension]} alt={files[tab].extension} className="filetype-icons"/>
+                                    <img src={file_type_icons[file.extension as keyof typeof file_type_icons]} alt={file.extension} className="filetype-icons"/>
                                     <div className='file-tab-name'>{tab}</div>
                                 </div>
                             }
                         })}
                     </div>
                     <div id="file-path">
-                        {files[selectedTab].path.map((step) => {
+                        {files[selectedTab as keyof typeof files].path.map((step) => {
                             return <div className='file-path-step'>{step+" >"}</div>
                         })}
                     </div>
                     <div id="file">
-                        {data}
+                        {data.map((element,index) => {
+                            return <div>element</div>
+                        })}
                     </div>
                 </div>
             </div>
