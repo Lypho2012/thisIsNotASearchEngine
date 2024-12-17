@@ -1,0 +1,21 @@
+#spotify-div {
+    background: linear-gradient(green,rgb(20, 20, 21));
+    height: 100vh;
+}
+#playlist-header {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+#playlist-title {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 100px;
+    font-size: 100px;
+    color: white;
+    font-family: 'Franklin Gothic Medium';
+}
+#model {
+    border: none;
+    background: none;
+}
