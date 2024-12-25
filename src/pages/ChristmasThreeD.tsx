@@ -36,12 +36,30 @@ function ChristmasThreeD() {
     renderer.setAnimationLoop( animate );*/
     const playList = [
         {
-          name: 'name',
-          writer: 'writer',
-          img: 'logo192.png',
-          src: 'test.mov',
+          name: 'Underneath the Tree',
+          writer: 'Kelly Clarkson',
+          img: 'underneath-the-tree.avif',
+          src: 'underneath-the-tree.mp4',
           id: 1,
-        },
+        },{
+            name: 'All I Want for Christmas is You',
+            writer: 'Mariah Carey',
+            img: 'all-i-want-for-christmas-is-you.avif',
+            src: 'all-i-want-for-christmas-is-you.mp4',
+            id: 2,
+          },{
+            name: 'Have Yourself a Merry Little Christmas',
+            writer: 'Michael Buble',
+            img: 'have-yourself-a-merry-little-christmas.avif',
+            src: 'have-yourself-a-merry-little-christmas.mp4',
+            id: 3,
+          },{
+            name: 'It\'s Beginning to Look a Lot Like Christmas',
+            writer: 'Bing Crosby',
+            img: 'its-beginning-to-look-a-lot-like-christmas.avif',
+            src: 'its-beginning-to-look-a-lot-like-christmas.mp4',
+            id: 4,
+          },
       ]
 
     const navigate = useNavigate();
@@ -105,9 +123,6 @@ function ChristmasThreeD() {
             </div>
             <AudioPlayer 
                 playList={playList}
-                audioInitialState={{
-                    curPlayId: 1,
-                }}
                 activeUI={{
                     playButton: true,
                     prevNnext: true,
@@ -116,8 +131,9 @@ function ChristmasThreeD() {
                     repeatType: true,
                     trackTime: true,
                     trackInfo: true,
-                    artwork: false,
-                    progress:"bar"}}
+                    artwork: true,
+                    progress:"bar",
+                    playList:"sortable"}}
                 rootContainerProps={{
                     colorScheme: "dark"
                 }} />
