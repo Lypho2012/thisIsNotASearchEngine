@@ -1,6 +1,7 @@
 #spotify-div {
     background: linear-gradient(green,rgb(20, 20, 21));
     height: 100vh;
+    width: max-content;
 }
 #playlist-header {
     display: flex;
