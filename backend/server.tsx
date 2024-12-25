@@ -14,7 +14,7 @@ app.get("/scrape", async (req, res) => {
   try {
     const response = await axios.get(url);
     const html = response.data;
-    //console.log(html)
+    console.log(html)
     const $ = cheerio.load(html);
     const data = [];
     $("p").each((index, element) => {
@@ -22,8 +22,10 @@ app.get("/scrape", async (req, res) => {
         text: $(element).text()
       });
     });
+    console.log(data)
     res.json(data);
   } catch (error) {
+    console.log(error)
     res.status(500).json({ message: "Error accessing the URL" });
   }
 });

@@ -1,11 +1,14 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import "./DisplayDay.css"
 import Birthday from './Birthday'
 import Thanksgiving from './Thanksgiving'
 import Halloween from './Halloween'
+import Christmas from './Christmas'
+import NewYears from './NewYears'
 
 function DisplayDay() {
+    const navigate = useNavigate()
     const {date} = useParams()
     const specialDates: Record<string,string> = {
         "8+25":"birthday",
@@ -27,6 +30,12 @@ function DisplayDay() {
         return <Thanksgiving/>
     } else if (occasion == "halloween") {
         return <Halloween/>
+    } else if (occasion == "christmas") {
+        return <Christmas/>
+    } else if (occasion == "new years eve") {
+        navigate("/show+me+some+christmas+magic")
+    } else if (occasion == "new years") {
+        return <NewYears/>
     } else {
         return (
             <div id="unknown-day-div">

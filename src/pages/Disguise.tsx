@@ -14,8 +14,8 @@ function Disguise() {
         setIsLoading(true);
         try {
             const result = await axios(`http://localhost:5001/scrape?url=${encodeURIComponent(url)}`);
-            console.log("http://localhost:5001/scrape?url="+encodeURIComponent(url))
             setData(result.data);
+            // console.log(data);
             navigate("vscode")
         } catch (error) {
             console.error("Error fetching data:", error);

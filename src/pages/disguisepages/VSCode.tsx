@@ -21,7 +21,6 @@ import Outline from "./list-unordered.svg"
 function VSCode() {
     const {data, setData} = useContext(ScrapedContext)
     const file_type_icons = {"py":PythonLogo,"ipynb":JupyterNotebookLogo}
-    console.log(data)
     const [files,setFiles] = useState({
         "notebook.ipynb":{
             "extension":"ipynb",
@@ -105,7 +104,9 @@ function VSCode() {
                     </div>
                     <div id="file">
                         {data.map((element,index) => {
-                            return <div>element</div>
+                            return <div className='code-cell'>
+                                <div className='code-cell-selector'></div>
+                            </div>
                         })}
                     </div>
                 </div>

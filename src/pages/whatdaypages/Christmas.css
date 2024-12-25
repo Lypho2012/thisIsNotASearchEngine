@@ -1,0 +1,34 @@
+#christmas-div {
+    background-color: rgb(227, 56, 56);
+    height: max-content;
+}
+.sparkle {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border:none;
+    animation: flicker 3s infinite;
+}
+@keyframes flicker {
+    0%,100% {
+        transform: scale(0)
+    }
+    50% {
+        transform: scale(1)
+    }
+}
+.sparkle-big {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border:none;
+    animation: flicker 3s infinite;
+}
+@keyframes flicker {
+    0%,100% {
+        transform: scale(0)
+    }
+    50% {
+        transform: scale(1)
+    }
+}
