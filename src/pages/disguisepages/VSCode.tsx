@@ -13,6 +13,10 @@ import Debug from "./debug-alt.svg"
 import Extensions from "./extensions.svg"
 import PythonLogo from "./python.svg"
 import JupyterNotebookLogo from "./notebook.svg"
+import Add from "./add.svg"
+import RunAll from "./run-all.svg"
+import ClearAll from "./clear-all.svg"
+import Outline from "./list-unordered.svg"
 
 function VSCode() {
     const {data, setData} = useContext(ScrapedContext)
@@ -83,10 +87,21 @@ function VSCode() {
                             }
                         })}
                     </div>
-                    <div id="file-path">
-                        {files[selectedTab as keyof typeof files].path.map((step) => {
-                            return <div className='file-path-step'>{step+" >"}</div>
-                        })}
+                    <div id="file-topbar">
+                        <div id="file-path">
+                            {files[selectedTab as keyof typeof files].path.map((step) => {
+                                return <div className='file-path-step'>{step+" >"}</div>
+                            })}
+                        </div>
+                        <div id="ipynb-buttons">
+                            <button className='ipynb-button'><div className='ipynb-button-content'><img src={Add} alt="add code" className="ipynb-icons"/> Code</div></button>
+                            <button className='ipynb-button'><div className='ipynb-button-content'><img src={Add} alt="add markdown" className="ipynb-icons"/> Markdown</div></button>
+                            <div className='separator'></div>
+                            <button className='ipynb-button'><div className='ipynb-button-content'><img src={RunAll} alt="Run all" className="ipynb-icons"/> Run All</div></button>
+                            <button className='ipynb-button'><div className='ipynb-button-content'><img src={ClearAll} alt="Clear all outputs" className="ipynb-icons"/> Clear All Outputs</div></button>
+                            <div className='separator'></div>
+                            <button className='ipynb-button'><div className='ipynb-button-content'><img src={Outline} alt="Outline" className="ipynb-icons"/> Outline</div></button>
+                        </div>
                     </div>
                     <div id="file">
                         {data.map((element,index) => {
