@@ -14,7 +14,7 @@ app.get("/scrape", async (req, res) => {
   try {
     const response = await axios.get(url);
     const html = response.data;
-    console.log(html)
+    console.log(url,html)
     const $ = cheerio.load(html);
     const data = [];
     $("p").each((index, element) => {

@@ -1,0 +1,21 @@
+#youtube-div {
+    background-color: white;
+}
+#youtube-topbar {
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+}
+#youtube-logo-button {
+    border: none;
+    background: none;
+    align-self: start;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+#youtube-logo-button:hover {
+    cursor: pointer;
+}
+#youtube-logo {
+    width: 100px;
+}

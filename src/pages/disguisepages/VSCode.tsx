@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import ScrapedContext from '../contexts/scraped_context'
 import "./VSCode.css"
 import LeftArrow from "./arrow-left.svg"

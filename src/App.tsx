@@ -17,6 +17,7 @@ import Disguise from './pages/Disguise';
 import VSCode from './pages/disguisepages/VSCode';
 import ScrapedContext from './pages/contexts/scraped_context';
 import ChristmasThreeD from './pages/ChristmasThreeD';
+import Youtube from './pages/youtubepages/Youtube';
 
 function App() {
   const [learned, setLearned] = useState(false)
@@ -41,6 +42,7 @@ function App() {
           <Route path="/disguise+my+website" element={<Disguise/>}/>
           <Route path="/disguise+my+website/vscode" element={<VSCode/>}/>
           <Route path="/show+me+some+christmas+magic" element={<ChristmasThreeD/>}/>
+          <Route path="/youtube" element={<Youtube/>}/>
         </Routes>
     </div>
     </BrowserRouter>
