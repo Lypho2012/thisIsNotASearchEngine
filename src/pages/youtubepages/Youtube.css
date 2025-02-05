@@ -5,6 +5,7 @@
     display: flex;
     flex-direction: row;
     height: 50px;
+    background-color: antiquewhite;
 }
 #youtube-logo-button {
     border: none;
@@ -18,4 +19,109 @@
 }
 #youtube-logo {
     width: 100px;
+}
+#menu-button {
+    background: none;
+    border: none;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 20px;
+}
+#menu-button:hover {
+    background-color: rgb(231, 231, 231);
+}
+#menu-icon {
+    height: 20px;
+}
+#youtube-searchbar {
+    display: flex;
+    flex-direction: horizontal;
+    margin-left: auto;
+    margin-right: auto;
+}
+#search-button {
+    border-radius: 0px 25px 25px 0px;
+    border-width: 1px;
+    height: 39px;
+    align-self: center;
+    border-color: rgb(237, 237, 237);
+}
+#search-button:hover {
+    cursor: pointer;
+}
+#search-icon {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 6px;
+    padding-bottom: 5px;
+}
+#searchbar {
+    border-radius: 25px 0px 0px 25px;
+    width: 500px;
+    border-width: 1px;
+    height: 35px;
+    align-self: center;
+    border-color: rgb(237, 237, 237);
+}
+#voice-button {
+    background-color: rgb(231, 231, 231);
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    border: none;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+#youtube-profile {
+    justify-content: end;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+#create-button {
+    border-radius: 25px;
+    border: none;
+    font-size: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+#add-icon {
+    margin-right: 7px;
+}
+#notification-button {
+    background: none;
+    border: none;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+#notification-button:hover {
+    background-color: rgb(231, 231, 231);
+}
+#notification-icon {
+    height: 20px;
+}
+
+#profile-button {
+    background: none;
+    border: none;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+#profile-button:hover {
+    cursor: pointer;;
+}
+#profile-icon {
+    height: 30px;
 }
