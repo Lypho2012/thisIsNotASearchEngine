@@ -14,9 +14,11 @@ function ImageComposition() {
       form.append('filler_image_file',fillerImage)
     }
 
-    axios.post('/create-image-composition', form)
-      .then(data => {
-        console.log(data);
+    axios.post('http://localhost:8000/create-image-composition', form)
+      .then(result => {
+        setResultImage(".."+result["data"]["res"]);
+        console.log(resultImage)
+        console.log("../image-compositions/composition2025-02-07_17-15-50.png")
       })
       .catch(error => {
         console.error('Error uploading image:', error);
@@ -29,30 +31,36 @@ function ImageComposition() {
   }
   const onFillerImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
-      console.log(event.target.files)
       setFillerImage(event.target.files[0])
     }
   }
   return (
     <div>
-      <div>
-        Select background image
-        <input
-          type="file"
-          accept="image/*"
-          onChange={onBackgroundImageChange}
-        />
+      <h1>Make an image composition!</h1>
+      <p>Choose 2 images, a background image (preferably has a transparent background and is only filled in at the desired outline to be filled) and a filler image, and this magic box will generate a composition where the filler image randomly populates the background image.</p>
+      <div style={{"margin":"20px"}}>
+        Select background image:
       </div>
-      <div>
-        Select filler image
-        <input
-          type="file"
-          accept="image/*"
-          onChange={onFillerImageChange}
-        />
+      <input
+        type="file"
+        accept="image/*"
+        onChange={onBackgroundImageChange}
+      />
+      <div style={{"margin":"20px"}}>
+        Select filler image:
       </div>
-      <button onClick={makeImage}>Create</button>
-      <img src={resultImage}/>
+      <input
+        type="file"
+        accept="image/*"
+        onChange={onFillerImageChange}
+      />
+      <br/>
+      <button onClick={makeImage} style={{"margin":"20px"}}>Create</button>
+      <br/>
+      {
+        resultImage ? <img src={resultImage}></img> : <></>
+      }
+      
     </div>
   )
 }

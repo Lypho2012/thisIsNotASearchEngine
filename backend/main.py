@@ -1,3 +1,6 @@
+'''
+Start server by running fastapi dev main.py
+'''
 from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -55,12 +58,10 @@ async def createImageComposition(background_image_file: UploadFile = File(), fil
 
     # save image
     date = datetime.now()
-    res_image_path = "composition"+date.strftime("%Y-%m-%d_%H-%M-%S")+".png"
-    print(res_image_path)
+    res_image_path = "src/image-compositions/composition"+date.strftime("%Y-%m-%d_%H-%M-%S")+".png"
     res_image.save(res_image_path)
-    Image.open(res_image_path).show()
     background_image.close()
     filler_image.close()
     res_image.close()
 
-    return JSONResponse({"res": res_image_path})
+    return JSONResponse({"res": res_image_path[3:]})
