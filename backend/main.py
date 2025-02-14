@@ -58,7 +58,7 @@ async def createImageComposition(background_image_file: UploadFile = File(), fil
 
     # save image
     date = datetime.now()
-    res_image_path = "src/image-compositions/composition"+date.strftime("%Y-%m-%d_%H-%M-%S")+".png"
+    res_image_path = "src/image-compositions/composition.png"#+date.strftime("%Y-%m-%d_%H-%M-%S")+".png"
     res_image.save(res_image_path)
     background_image.close()
     filler_image.close()

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 
 function ImageComposition() {
   const [backgroundImage,setBackgroundImage] = useState<File|null>(null)
@@ -17,8 +17,6 @@ function ImageComposition() {
     axios.post('http://localhost:8000/create-image-composition', form)
       .then(result => {
         setResultImage(".."+result["data"]["res"]);
-        console.log(resultImage)
-        console.log("../image-compositions/composition2025-02-07_17-15-50.png")
       })
       .catch(error => {
         console.error('Error uploading image:', error);
@@ -57,9 +55,7 @@ function ImageComposition() {
       <br/>
       <button onClick={makeImage} style={{"margin":"20px"}}>Create</button>
       <br/>
-      {
-        resultImage ? <img src={resultImage}></img> : <></>
-      }
+      {resultImage ? <img src={require("../image-compositions/composition.png")}/>: <></>}
       
     </div>
   )
