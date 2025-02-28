@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Google.css"
 import { useNavigate } from 'react-router-dom'
+import axios from "axios";
 
 function Google() {
     const navigate = useNavigate()
@@ -10,8 +11,12 @@ function Google() {
             navigate("/")
         }
     })
+    useEffect(() => {
+        axios.post('http://localhost:8000/create-today-google-banner');
+    })
     return (
         <div id="Google-header">
+            <img id="banner" src={require("./banner.png")}/>
             <div id="big-g-letter" className="Google-letter">G</div>
             <div id="first-o-letter" className="Google-letter">o</div>
             <div id="second-o-letter" className="Google-letter">o</div>

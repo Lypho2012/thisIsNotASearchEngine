@@ -8,6 +8,7 @@ from datetime import datetime
 from PIL import Image
 import random
 from io import BytesIO
+from today_image import compose_banner
 
 app = FastAPI()
 
@@ -23,6 +24,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"]
 )
+
+@app.post("/create-today-google-banner")
+async def getTodayImage():
+    compose_banner()
 
 @app.post("/create-image-composition")
 async def createImageComposition(background_image_file: UploadFile = File(), filler_image_file: UploadFile = File()):

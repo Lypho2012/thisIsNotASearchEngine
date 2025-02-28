@@ -1,12 +1,12 @@
 #Google-header {
     display: flex;
     flex-direction: row;
-    width:fit-content;
     margin-top: 10%;
     margin-bottom: 1%;
     margin-left: auto;
     margin-right: auto;
-    height: fit-content;
+    width:500px;
+    height: 200px;
 }
 #Google-header:hover {
     cursor: pointer;
@@ -26,4 +26,8 @@
 }
 #l-letter {
     color: #34A853;
+}
+#banner {
+    position: absolute;
+    z-index: -100;
 }
