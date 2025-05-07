@@ -19,6 +19,7 @@ import ScrapedContext from './pages/contexts/scraped_context';
 import ChristmasThreeD from './pages/ChristmasThreeD';
 import Youtube from './pages/youtubepages/Youtube';
 import ImageComposition from './pages/ImageComposition';
+import Collage from './pages/Collage';
 
 function App() {
   const [learned, setLearned] = useState(false)
@@ -45,6 +46,7 @@ function App() {
           <Route path="/show+me+some+christmas+magic" element={<ChristmasThreeD/>}/>
           <Route path="/youtube" element={<Youtube/>}/>
           <Route path="/image-composition" element={<ImageComposition/>}/>
+          <Route path="/collage-generator" element={<Collage/>}/>
         </Routes>
     </div>
     </BrowserRouter>

@@ -6,3 +6,7 @@ bs4
 pytest
 serpapi
 google-search-results
+numpy
+google-auth
+google-auth-oauthlib
+google-api-python-client

@@ -84,7 +84,8 @@ function SearchBar({prevSearchTerm=""}) {
         "help me do some calculations",
         "disguise my website",
         "show me some christmas magic",
-        "youtube"
+        "youtube",
+        "collage generator"
     ]
     const trieRoot = createTrie(SEARCH_PROMPTS)
     const [searchTerm, setSearchTerm] = useState(prevSearchTerm)

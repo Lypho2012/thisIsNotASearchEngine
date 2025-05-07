@@ -26,3 +26,7 @@ yarn-error.log*
 *.mov
 
 .env
+
+token.json
+package-lock.json
+google_photos_picker_secret.json

@@ -2,11 +2,10 @@
     display: flex;
     flex-direction: row;
     margin-top: 10%;
-    margin-bottom: 1%;
+    margin-bottom: 4%;
     margin-left: auto;
     margin-right: auto;
-    width:500px;
-    height: 200px;
+    justify-content: center;
 }
 #Google-header:hover {
     cursor: pointer;
@@ -14,6 +13,7 @@
 .Google-letter {
     font-family: futura;
     font-size: 100px;
+    padding-top: 2%;
 }
 #first-o-letter, #e-letter {
     color: #EA4335;
@@ -28,6 +28,9 @@
     color: #34A853;
 }
 #banner {
+    margin-left: 40px;
     position: absolute;
     z-index: -100;
+    width: 50%;
+    height: 20%;
 }
