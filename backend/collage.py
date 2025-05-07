@@ -18,6 +18,9 @@ from selenium.webdriver.common.action_chains import ActionChains
 
 import time
 
+import random
+import urllib.request 
+
 class GoogleAuth(httpx.Auth):
     def __init__(self, credentials):
         self.credentials = credentials
@@ -105,6 +108,10 @@ def select_all_images(url):
     #     except:
     #         continue
 
+def tint(image,color):
+    overlay = Image.new("RGBA", image.size, color + (0,))
+    return Image.blend(image, overlay, 0.5)
+
 async def create_collage(background_image):
     creds = authenticate_google("backend/google_photos_picker_secret.json",["https://www.googleapis.com/auth/photospicker.mediaitems.readonly"])
     client = httpx.AsyncClient(auth=GoogleAuth(creds))
@@ -135,7 +142,6 @@ async def create_collage(background_image):
             nextPageToken = session_info["nextPageToken"]
         else:
             break
-    print(len(picked))
 
     # create image
     res_image = Image.new(mode="RGBA", size=background_image.size, color=(255,255,255,0))
@@ -148,19 +154,30 @@ async def create_collage(background_image):
             # get a random image from photos and paste it if its avg color is close enough
             filler_image = None
             filler_avg_color = -bg_avg_color
-            while not is_similar_color(bg_avg_color,filler_avg_color):
-                filler_image = None
+            limit = 100
+            while not is_similar_color(bg_avg_color,filler_avg_color) and limit > 0:
+                if filler_image:
+                    filler_image.close()
+
+                response = await client.get(picked[random.randint(0,len(picked)-1)])
+                with open("temp_img.jpg", 'wb') as file:
+                    file.write(response.content)
+
+                filler_image = Image.open("temp_img.jpg")
                 filler_avg_color = get_avg_color(filler_image,0,0)
+                limit -= 1
 
             # fix size of image and paste it
             min_dim = min(filler_image.width,filler_image.height)
             filler_image = filler_image.crop((0,0,min_dim,min_dim)).resize((10,10))
+            filler_image = tint(filler_image,bg_avg_color)
             res_image.paste(filler_image,(x,y))
+            filler_image.close()
 
     # save image
-    # res_image_path = "src/image-compositions/collage.png"
-    # res_image.save(res_image_path)
-    # res_image.close()
+    res_image_path = "src/image-compositions/collage.png"
+    res_image.save(res_image_path)
+    res_image.close()
     background_image.close()
 
 if __name__ == "__main__":
