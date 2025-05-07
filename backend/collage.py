@@ -157,7 +157,7 @@ async def create_collage(background_image):
             # get a random image from photos and paste it if its avg color is close enough
             filler_image = None
             filler_avg_color = -bg_avg_color
-            limit = 100
+            limit = 50
             while not is_similar_color(bg_avg_color,filler_avg_color) and limit > 0:
                 if filler_image:
                     filler_image.close()
