@@ -8,7 +8,6 @@ import httpx
 import asyncio
 import json
 
-from dotenv import load_dotenv
 import os
 
 from selenium import webdriver
@@ -19,7 +18,8 @@ from selenium.webdriver.common.action_chains import ActionChains
 import time
 
 import random
-import urllib.request 
+
+from tqdm import tqdm
 
 class GoogleAuth(httpx.Auth):
     def __init__(self, credentials):
@@ -109,7 +109,8 @@ def select_all_images(url):
     #         continue
 
 def tint(image,color):
-    overlay = Image.new("RGBA", image.size, color + (0,))
+    image = image.convert("RGBA")
+    overlay = Image.new("RGBA", image.size, (int(color[0]),int(color[1]),int(color[2]),0))
     return Image.blend(image, overlay, 0.5)
 
 async def create_collage(background_image):
@@ -131,6 +132,8 @@ async def create_collage(background_image):
         session_info = json.loads(google_photos.content.decode('utf-8'))
         can_continue = session_info["mediaItemsSet"]
 
+    print("Session finished")
+
     # get selected photos
     picked = []
     nextPageToken = ""
@@ -147,8 +150,8 @@ async def create_collage(background_image):
     res_image = Image.new(mode="RGBA", size=background_image.size, color=(255,255,255,0))
 
     # randomly fill the image
-    for x in range(0,background_image.width,10):
-        for y in range(0,background_image.height,10):
+    for x in tqdm(range(0,background_image.width,10),desc="X axis"):
+        for y in tqdm(range(0,background_image.height,10),desc="Y axis",leave=False):
             # avg color of this patch
             bg_avg_color = get_avg_color(background_image,x,y)
             # get a random image from photos and paste it if its avg color is close enough
