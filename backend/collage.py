@@ -153,6 +153,8 @@ async def create_collage(background_image):
 
     # create image
     res_image = Image.new(mode="RGB", size=background_image.size, color=(255,255,255))
+    used = [False]*len(picked)
+    k = [1]*len(picked)
 
     # randomly fill the image
     for x in range(0,background_image.height-10,10):
@@ -160,19 +162,34 @@ async def create_collage(background_image):
             print(x,y)
             # avg color of this patch
             bg_avg_color = get_avg_color(background_image,x,y,x+10,y+10)
-            # get a random image from photos and paste it if its avg color is close enough
-            color = colors.data[colors.query(bg_avg_color)[1]]
-            response = await client.get(picked[(int(color[0]),int(color[1]),int(color[2]))])
-            with open("temp_img.jpg", 'wb') as file:
-                file.write(response.content)
-            filler_image = Image.open("temp_img.jpg")
 
-            # fix size of image and paste it
-            min_dim = min(filler_image.width,filler_image.height)
-            filler_image = filler_image.crop((0,0,min_dim,min_dim)).resize((10,10))
-            filler_image = tint(filler_image,bg_avg_color)
-            res_image.paste(filler_image,(y,x))
-            filler_image.close()
+            # get image with closest color, try not to repeat images
+            while True:
+                index = colors.query(bg_avg_color)[1]
+                if used[index]:
+                    k[index] = k[index]%10+1
+                    _,indices = colors.query(bg_avg_color,k=k[index])
+                    try:
+                        index = indices[-1]
+                    except:
+                        index = indices
+                used[index] = True
+                color = colors.data[index]
+                try:
+                    response = await client.get(picked[(int(color[0]),int(color[1]),int(color[2]))])
+                    with open("temp_img.jpg", 'wb') as file:
+                        file.write(response.content)
+                    filler_image = Image.open("temp_img.jpg")
+
+                    # fix size of image and paste it
+                    min_dim = min(filler_image.width,filler_image.height)
+                    filler_image = filler_image.crop((0,0,min_dim,min_dim)).resize((10,10))
+                    filler_image = tint(filler_image,bg_avg_color)
+                    res_image.paste(filler_image,(y,x))
+                    filler_image.close()
+                    break
+                except Exception as e:
+                    print("Failed to open "+picked[(int(color[0]),int(color[1]),int(color[2]))],e)
 
     # save image
     res_image_path = "src/image-compositions/collage.png"
