@@ -119,7 +119,7 @@ async def create_collage(background_image):
     session_info = json.loads(google_photos.content.decode('utf-8'))
     url = session_info["pickerUri"]
     session_id = session_info["id"]
-    print(session_info)
+    print(url)
 
     # check when session is finished
     can_continue = False
@@ -139,12 +139,15 @@ async def create_collage(background_image):
         session_info = json.loads(google_photos.content.decode('utf-8'))
         for photo in session_info["mediaItems"]:
             photo_url = photo["mediaFile"]["baseUrl"]
-            response = await client.get(photo_url)
-            with open("temp_img.jpg", 'wb') as file:
-                file.write(response.content)
-            image = Image.open("temp_img.jpg")
-            color = get_avg_color(image,0,0,image.width,image.height)
-            picked[(int(color[0]),int(color[1]),int(color[2]))] = photo_url
+            try:
+                response = await client.get(photo_url)
+                with open("temp_img.jpg", 'wb') as file:
+                    file.write(response.content)
+                image = Image.open("temp_img.jpg")
+                color = get_avg_color(image,0,0,image.width,image.height)
+                picked[(int(color[0]),int(color[1]),int(color[2]))] = photo_url
+            except:
+                continue
         if "nextPageToken" in session_info:
             nextPageToken = session_info["nextPageToken"]
         else:
@@ -152,16 +155,18 @@ async def create_collage(background_image):
     colors = KDTree(np.array(list(picked.keys())))
 
     # create image
-    res_image = Image.new(mode="RGB", size=background_image.size, color=(255,255,255))
+    RESOLUTION = 10
+    PATCH_SIZE = 10
+    res_image = Image.new(mode="RGB", size=(background_image.width*RESOLUTION,background_image.height*RESOLUTION), color=(255,255,255))
     used = [False]*len(picked)
     k = [1]*len(picked)
 
     # randomly fill the image
-    for x in range(0,background_image.height-10,10):
-        for y in range(0,background_image.width-10,10):
+    for x in range(0,background_image.height-PATCH_SIZE,PATCH_SIZE):
+        for y in range(0,background_image.width-PATCH_SIZE,PATCH_SIZE):
             print(x,y)
             # avg color of this patch
-            bg_avg_color = get_avg_color(background_image,x,y,x+10,y+10)
+            bg_avg_color = get_avg_color(background_image,x,y,x+PATCH_SIZE,y+PATCH_SIZE)
 
             # get image with closest color, try not to repeat images
             while True:
@@ -179,11 +184,11 @@ async def create_collage(background_image):
                     response = await client.get(picked[(int(color[0]),int(color[1]),int(color[2]))])
                     with open("temp_img.jpg", 'wb') as file:
                         file.write(response.content)
-                    filler_image = Image.open("temp_img.jpg")
+                    filler_image = Image.open("temp_img.jpg").convert("RGB")
 
                     # fix size of image and paste it
                     min_dim = min(filler_image.width,filler_image.height)
-                    filler_image = filler_image.crop((0,0,min_dim,min_dim)).resize((10,10))
+                    filler_image = filler_image.crop((0,0,min_dim,min_dim)).resize((PATCH_SIZE*RESOLUTION,PATCH_SIZE*RESOLUTION))
                     filler_image = tint(filler_image,bg_avg_color)
                     res_image.paste(filler_image,(y,x))
                     filler_image.close()
