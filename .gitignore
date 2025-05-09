@@ -31,3 +31,4 @@ token.json
 package-lock.json
 google_photos_picker_secret.json
 temp_img.jpg
+backend/photos/*

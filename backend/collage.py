@@ -16,7 +16,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 
 import time
-import tqdm
+from tqdm import tqdm
 
 from scipy.spatial import KDTree
 
@@ -153,7 +153,7 @@ async def save_photos():
 def create_collage_from_photos(background_image):
     picked = {}
     for file in os.listdir("backend/photos"):
-        image = Image.open(file)
+        image = Image.open(f"backend/photos/{file}")
         color = get_avg_color(image,0,0,image.width,image.height)
         picked[(int(color[0]),int(color[1]),int(color[2]))] = file
     colors = KDTree(np.array(list(picked.keys())))
@@ -166,9 +166,8 @@ def create_collage_from_photos(background_image):
     k = [1]*len(picked)
 
     # randomly fill the image
-    for x in range(0,background_image.height-PATCH_SIZE,PATCH_SIZE):
+    for x in tqdm(range(0,background_image.height-PATCH_SIZE,PATCH_SIZE)):
         for y in range(0,background_image.width-PATCH_SIZE,PATCH_SIZE):
-            print(x,y)
             # avg color of this patch
             bg_avg_color = get_avg_color(background_image,x,y,x+PATCH_SIZE,y+PATCH_SIZE)
 
@@ -186,7 +185,7 @@ def create_collage_from_photos(background_image):
                 color = colors.data[index]
                 file = picked[(int(color[0]),int(color[1]),int(color[2]))]
                 try:
-                    filler_image = Image.open(file).convert("RGB")
+                    filler_image = Image.open(f"backend/photos/{file}").convert("RGB")
 
                     # fix size of image and paste it
                     min_dim = min(filler_image.width,filler_image.height)
@@ -298,4 +297,5 @@ async def create_collage(background_image):
 
 if __name__ == "__main__":
     # asyncio.run(create_collage(Image.open("backend/mothersday.jpg")))
-    asyncio.run(save_photos())
+    # asyncio.run(save_photos())
+    create_collage_from_photos(Image.open("backend/mothersday.jpg"))
