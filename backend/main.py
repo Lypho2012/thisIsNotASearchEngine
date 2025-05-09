@@ -9,7 +9,7 @@ from PIL import Image
 import random
 from io import BytesIO
 from today_image import compose_banner
-from collage import create_collage
+from collage import create_collage_from_photos
 
 app = FastAPI()
 
@@ -79,4 +79,5 @@ async def createCollage(background_image_file: UploadFile = File()):
     background_image_stream = BytesIO(background_contents)
     background_image = Image.open(background_image_stream)
 
-    create_collage(background_image)
+    create_collage_from_photos(background_image)
+    background_image.close()

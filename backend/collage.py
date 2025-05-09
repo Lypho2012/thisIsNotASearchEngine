@@ -191,7 +191,7 @@ def create_collage_from_photos(background_image):
                     min_dim = min(filler_image.width,filler_image.height)
                     filler_image = filler_image.crop((0,0,min_dim,min_dim)).resize((PATCH_SIZE*RESOLUTION,PATCH_SIZE*RESOLUTION))
                     filler_image = tint(filler_image,bg_avg_color)
-                    res_image.paste(filler_image,(y,x))
+                    res_image.paste(filler_image,(y*RESOLUTION,x*RESOLUTION))
                     filler_image.close()
                     break
                 except Exception as e:

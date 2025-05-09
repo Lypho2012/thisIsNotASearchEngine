@@ -37,7 +37,7 @@ function Collage() {
         <br/>
         <button onClick={makeImage} style={{"margin":"20px"}}>Create</button>
         <br/>
-        <img src={require("../image-compositions/composition.png")}/>
+        <img src={require("../image-compositions/collage.png")}/>
         </div>
     )
 }

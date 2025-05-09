@@ -1,5 +1,3 @@
-import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import AudioPlayer from 'react-modern-audio-player';
 import "./ChristmasThreeD.css"
 import { useState, useEffect } from 'react';
