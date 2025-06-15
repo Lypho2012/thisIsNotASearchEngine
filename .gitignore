@@ -33,3 +33,5 @@ google_photos_picker_secret.json
 temp_img.jpg
 backend/photos/*
 mothersdaycollage.png
+backend/point_cloud_images/*
+src/pages/components/banner.png
